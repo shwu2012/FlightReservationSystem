@@ -1,0 +1,175 @@
+body {
+	background-image:
+		url("http://blog.heartland.org/wp-content/uploads/2013/08/Boeing-787-Dreamliner1-1.jpg");
+	background-size: cover;
+}
+
+#main {
+	width: 1000px;
+	margin: auto;
+}
+
+#header {
+	text-align: center;
+}
+
+#administrator {
+	margin-left: 25px;
+}
+
+#passenger {
+	margin-right: 25px;
+}
+
+#employee {
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+#regPassenger {
+	margin-right: 25px;
+}
+
+#regEmployee {
+	margin-left: 25px;
+}
+
+#regAdministrator {
+	margin-left: 25px;
+}
+
+button {
+	font-size: 16px;
+	color: #FFF;
+	border: 1px solid #000;
+}
+
+.primaryButton {
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #1975FF;
+	cursor: pointer;
+}
+
+.primaryButton:hover,.login:hover {
+	background-color: #4791FF;
+}
+
+#userType {
+	width: 500px;
+	margin: auto;
+	text-align: center;
+	margin-top: 60px;
+	position: relative;
+}
+
+.login {
+	padding: 8px;
+	border: 1px solid #000;
+	border-radius: 5px;
+	background-color: #1975FF;
+	margin-top: 10px;
+	color: #FFF;
+	cursor: pointer;
+}
+
+.cancelButton {
+	padding: 8px;
+	border: 1 px solid #000;
+	border-radius: 5px;
+	background-color: #888;
+	margin-top: 10px;
+	color: #000;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.cancelButton:hover {
+	background-color: #DDD;
+}
+
+.signIn {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	background-color: #FFF;
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 10px 10px 25px 10px;
+	width: 460px;
+}
+
+.register {
+	display: none;
+	position: absolute;
+	top: -25px;
+	left: 10px;
+	background-color: #FFF;
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 10px;
+	width: 500px;
+}
+
+.registerContainer {
+	width: 260px;
+	margin: auto;
+	text-align: right;
+}
+
+#registerHeader {
+	margin-top: 35px;
+	color: #FF0000;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+#loginHeader {
+	color: #008000;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.required {
+	font-style: bold;
+	color: #FF0000;
+	margin-right: 5px;
+}
+
+.registerSpacing {
+	margin: 5px;
+}
+
+.signInSpacing {
+	margin-top: 25px;
+}
+
+.signInInput {
+	height: 25px;
+	border: 1px solid #000;
+	border-radius: 3px;
+}
+
+#pgm {
+	margin-left: 5px;
+}
+
+#pGenderF {
+	margin-right: 87px;
+}
+
+#pRegister {
+	margin-right: 25px;
+}
+
+.redText {
+	color: #FF0000;
+}
+
+.hidden {
+	display: none;
+}
+
+.loginInstruction {
+	margin-top: 0;
+}

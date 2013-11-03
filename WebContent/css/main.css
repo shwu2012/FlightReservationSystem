@@ -1,0 +1,208 @@
+body {
+	background-image:
+		url("http://blog.heartland.org/wp-content/uploads/2013/08/Boeing-787-Dreamliner1-1.jpg");
+	background-size: cover;
+}
+
+#main {
+	width: 1050px;
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 10px;
+	font-size: 14pt;
+}
+
+#header {
+	text-align: center;
+	position: relative;
+	padding-bottom: 1px;
+}
+
+#userLogout {
+	text-decoration: none;
+	color: #000;
+}
+
+#userLogout:hover {
+	color: #888;
+}
+
+#menu {
+	text-align: center;
+}
+
+.menuOption {
+	display: inline;
+	border: 1px solid #000;
+	padding: 10px;
+	background-color: #1975FF;
+	border-radius: 5px;
+	color: #FFF;
+}
+
+.menuOption:hover {
+	background-color: #4791FF;
+	cursor: pointer;
+	color: #000;
+}
+
+#menuItems {
+	list-style: none;
+	padding: 0;
+}
+
+#menuItems li a{
+	color: white;
+	text-decoration: none;
+}
+
+#welcome {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+#userLogout {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 14pt;
+}
+
+#contentArea {
+	text-align: center;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.required {
+	font-style: bold;
+	color: #FF0000;
+	margin-right: 5px;
+}
+
+.registerSpacing {
+	margin: 5px;
+}
+
+.login {
+	padding: 8px;
+	border-radius: 5px;
+	background-color: #1975FF;
+	margin-top: 10px;
+}
+
+.searchButton {
+	padding: 4px;
+	font-size: 14px;
+	border-radius: 5px;
+	background-color: #228B22;
+}
+
+.searchButton:hover {
+	background-color: #32CD32;
+}
+
+.reserve {
+	padding: 4px;
+	font-size: 15px;
+	border-radius: 5px;
+	background-color: #228B22;
+	margin-top: 10px;
+}
+
+.reserve:hover {
+	background-color: #32CD32;
+}
+
+.cancelReservation {
+	padding: 4px;
+	font-size: 15px;
+	border-radius: 5px;
+	background-color: #6495ED;
+}
+
+.cancelReservation:hover {
+	background-color: #87CEFA;
+}
+
+button {
+	font-size: 16px;
+	color: #FFF;
+	border: 1px solid #000;
+	cursor: pointer;
+}
+
+.login:hover {
+	background-color: #4791FF;
+}
+
+#registerPassenger {
+	width: 300px;
+	margin: auto;
+	text-align: right;
+}
+
+.hidden {
+	display: none;
+}
+
+.custInfo {
+	text-align: left;
+	padding: 5px;
+}
+
+.custInfoLabel {
+	text-align: right;
+	padding: 5px;
+}
+
+table#pinfo {
+	margin: auto;
+}
+
+.shortInput {
+	width: 70px;
+}
+
+.shortDateInput {
+	width: 135px;
+}
+
+.center {
+	margin: auto;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.tableBorder {
+	border: 1px solid #000;
+}
+
+.flightSearchResults {
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.flightSearchResults td {
+	padding: 5px;
+	border: 1px solid #000;
+}
+
+.textAlignLeft {
+	text-align: left;
+}
+
+.textAlignRight {
+	text-align: right;
+}
+
+#departFlightsLabel,#returnFlightsLabel {
+	font-weight: bold;
+	margin-top: 15px;
+}
+
+#roundTripDepartures,#roundTripReturns {
+	margin-top: 5px;
+}

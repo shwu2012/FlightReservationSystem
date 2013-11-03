@@ -1,33 +1,39 @@
 package sjsu.cs157a.dbpro.domain;
 
-import java.util.Date;
+import java.sql.Time;
 
 public class Ticket {
-	private Date departureDate;
-	private String departureAirportCode;
-	private String arrivalAirportCode;
+	private String airlineName;
+	private Time departureTime;
+	private Time arrivalTime;
 	private String flightNumber;
-	private String airlineCode;
 	private String seatClass;
 	private float price;
+	private int availableSeats;
 	
-	public Date getDepartureDate() {
-		return departureDate;
+	public String getAirlineName() {
+		return airlineName;
 	}
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
+	public void setAirlineName(String airlineName) {
+		this.airlineName = airlineName;
 	}
-	public String getDepartureAirportCode() {
-		return departureAirportCode;
+	public Time getDepartureTime() {
+		return departureTime;
 	}
-	public void setDepartureAirportCode(String departureAirportCode) {
-		this.departureAirportCode = departureAirportCode;
+	public void setDepartureTime(Time departureTime) {
+		this.departureTime = departureTime;
 	}
-	public String getArrivalAirportCode() {
-		return arrivalAirportCode;
+	public Time getArrivalTime() {
+		return arrivalTime;
 	}
-	public void setArrivalAirportCode(String arrivalAirportCode) {
-		this.arrivalAirportCode = arrivalAirportCode;
+	public void setArrivalTime(Time arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+	public int getAvailableSeats() {
+		return availableSeats;
+	}
+	public void setAvailableSeats(int availableSeats) {
+		this.availableSeats = availableSeats;
 	}
 	public String getFlightNumber() {
 		return flightNumber;
@@ -35,12 +41,6 @@ public class Ticket {
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
 	}
-	public String getAirlineCode() {
-		return airlineCode;
-	}
-	public void setAirlineCode(String airlineCode) {
-		this.airlineCode = airlineCode;
-	}	
 	public String getSeatClass() {
 		return seatClass;
 	}

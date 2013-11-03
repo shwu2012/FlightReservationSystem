@@ -1,21 +1,47 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-
-	<display-name>CS157A project</display-name>
-
-	<servlet>
-		<servlet-name>register</servlet-name>
-		<servlet-class>sjsu.cs157a.dbpro.servlet.RegisterServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>register</servlet-name>
-		<url-pattern>/register</url-pattern>
-	</servlet-mapping>
-
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>CS157A project</display-name>
+  <servlet>
+    <servlet-name>searchFlights</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.SearchFlightsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>signIn</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.SignInServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>register</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>passengerDashboard</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.PassengerDashboardServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchFlights</servlet-name>
+    <url-pattern>/searchflights</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>signIn</servlet-name>
+    <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>register</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>passengerDashboard</servlet-name>
+    <url-pattern>/passengerdashboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 </web-app>
