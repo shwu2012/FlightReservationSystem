@@ -20,6 +20,8 @@ public class LoginCheckFilter implements Filter {
 
 	private static final String SIGN_IN_PATH = "/signin";
 
+	private static final String REGISTER_PATH = "/register";
+
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
@@ -27,7 +29,8 @@ public class LoginCheckFilter implements Filter {
 		String path = req.getServletPath();
 		// place your code here
 		logger.info("before chain.doFilter(): " + path);
-		if (!path.equals(SIGN_IN_PATH) && path.indexOf('.') == -1) {
+		if (!path.equals(SIGN_IN_PATH) && !path.equals(REGISTER_PATH)
+				&& path.indexOf('.') == -1) {
 			if (req.getSession().getAttribute("username") == null) {
 				logger.warn("unexpected access to path: " + path);
 				resp.sendRedirect(req.getServletContext().getContextPath()

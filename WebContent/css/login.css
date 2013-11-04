@@ -100,7 +100,6 @@ button {
 }
 
 .register {
-	display: none;
 	position: absolute;
 	top: -25px;
 	left: 10px;

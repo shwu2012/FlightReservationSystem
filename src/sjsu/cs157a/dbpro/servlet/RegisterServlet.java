@@ -75,6 +75,7 @@ public class RegisterServlet extends HttpServlet {
 		int age = calculateAgeByDOB(dateOfBirth);
 				
 		PreparedStatement prepStmt = null;
+		String sqlError = null;
 		String sql = "Insert into passenger "
 				+ "values ("
 				+ "?, "
@@ -119,6 +120,7 @@ public class RegisterServlet extends HttpServlet {
 			prepStmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
+			sqlError = se.getMessage();
 		} finally {
 			try {
 				prepStmt.close();
@@ -131,9 +133,17 @@ public class RegisterServlet extends HttpServlet {
 		dbc.closeConnection(conn);
 		logger.info("Username: " + puserName);
 
-		req.getSession().setAttribute("username", puserName);
-		// Redirect to dashboard.
-		resp.sendRedirect("passengerdashboard?show=viewCustomerInfo");	
+		if (sqlError == null) {
+			req.getSession().setAttribute("username", puserName);
+			// Redirect to dashboard.
+			resp.sendRedirect("passengerdashboard?show=viewCustomerInfo");
+		} else {
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("type", "registerPassenger");
+			req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req,
+					resp);
+		}
+
 	}
 
 	private static int calculateAgeByDOB(Date dateOfBirth) {

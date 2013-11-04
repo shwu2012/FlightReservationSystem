@@ -66,13 +66,16 @@
                 <button id="alogin" class="login signInSpacing">Sign In</button>
             </div>
             
-            <div id="registerPassenger" class="register">
+            <div id="registerPassenger" class="register <c:if test="${type ne 'registerPassenger'}">hidden</c:if>" >
                 <h2>Passenger Registration</h2>
                 <p>Fields marked with <span class="required">*</span> are required.  Username must only be characters a-z,A-Z,0-9.  Password must be 8 or more characters and contain at least 1 letter and 1 digit.</p>
                 <span id="pRegError"></span>
                 <br/>
                 <div class="registerContainer">
                     <form action="register" method="post" id="passRegisterForm">
+                    <c:if test="${not empty sqlError}">
+                      <span id="passLoginError" class="redText"><c:out value="${sqlError}" /></span><br/>
+                    </c:if>
                     <span class="required">*</span><label for="pUName">User Name:</label><input id="pUName" class="registerSpacing" name="puserName" type="text"/>
                     <br/>
                     <span class="required">*</span><label for="pPassword">Password:</label><input id="pPassword" name="ppassword" class="registerSpacing" type="password"/>
@@ -106,7 +109,7 @@
                 </div>
             </div>
             
-            <div id="registerEmployee" class="register">
+            <div id="registerEmployee" class="register <c:if test="${type ne 'registerEmployee'}">hidden</c:if>">
                 <h2>Employee Registration</h2>
                 <p>Fields marked with <span class="required">*</span> are required.  Username must only be characters a-z,A-Z,0-9.  Password must be 8 or more characters and contain at least 1 letter and 1 digit.</p>
                 <span id="eRegError"></span>
