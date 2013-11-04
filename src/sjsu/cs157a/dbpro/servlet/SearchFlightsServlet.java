@@ -37,8 +37,7 @@ public class SearchFlightsServlet extends HttpServlet {
 			returnDate = req.getParameter("returnDate");
 		}
 
-		DbConnection dbc = new DbConnection();
-		Connection conn = dbc.openConnection();
+		Connection conn = DbConnection.openConnection();
 		PreparedStatement prepStmt = null;
 		String sql = "select airlineName, flightNumber, departureAirportCode, arrivalAirportCode, departureTime, arrivalTime, price, availableSeats "
 				+ "from flight natural join ticket natural join airline where "
@@ -84,7 +83,7 @@ public class SearchFlightsServlet extends HttpServlet {
 			}
 		}
 
-		dbc.closeConnection(conn);
+		DbConnection.closeConnection(conn);
 		logger.info("tickets count: " + tickets.size());
 		req.setAttribute("departureCity", departureCity);
 		req.setAttribute("arrivalCity", arrivalCity);

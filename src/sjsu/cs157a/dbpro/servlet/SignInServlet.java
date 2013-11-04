@@ -32,8 +32,7 @@ public class SignInServlet extends HttpServlet {
 		String pusername = req.getParameter("pusername");
 		String ppassword = req.getParameter("ppassword");
 
-		DbConnection dbc = new DbConnection();
-		Connection conn = dbc.openConnection();
+		Connection conn = DbConnection.openConnection();
 		PreparedStatement prepStmt = null;
 		ResultSet rs = null;
 		int count = 0;
@@ -62,7 +61,7 @@ public class SignInServlet extends HttpServlet {
 			}
 		}
 
-		dbc.closeConnection(conn);
+		DbConnection.closeConnection(conn);
 
 		if (count == 1) {
 			logger.info("set username: " + pusername);

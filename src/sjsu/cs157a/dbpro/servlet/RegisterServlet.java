@@ -45,8 +45,7 @@ public class RegisterServlet extends HttpServlet {
 		String pstateProvinceCounty = req.getParameter("pstateProvinceCounty");
 		String pcountry = req.getParameter("pcountry");				
 
-		DbConnection dbc = new DbConnection();
-		Connection conn = dbc.openConnection();
+		Connection conn = DbConnection.openConnection();
 		
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -130,7 +129,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		}
 
-		dbc.closeConnection(conn);
+		DbConnection.closeConnection(conn);
 		logger.info("Username: " + puserName);
 
 		if (sqlError == null) {

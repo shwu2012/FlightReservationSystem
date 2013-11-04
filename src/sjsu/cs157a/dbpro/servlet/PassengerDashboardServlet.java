@@ -35,8 +35,7 @@ public class PassengerDashboardServlet extends HttpServlet {
 		if (req.getParameter("show").equals("viewCustomerInfo")) {
 			String username = (String) req.getSession()
 					.getAttribute("username");
-			DbConnection dbc = new DbConnection();
-			Connection conn = dbc.openConnection();
+			Connection conn = DbConnection.openConnection();
 
 			ResultSet rs = null;
 			Passenger passenger = new Passenger();
@@ -78,7 +77,7 @@ public class PassengerDashboardServlet extends HttpServlet {
 				}
 			}
 
-			dbc.closeConnection(conn);
+			DbConnection.closeConnection(conn);
 			req.setAttribute("passenger", passenger);
 		}
 		else if (req.getParameter("show").equals("editPassengerInfo")){
