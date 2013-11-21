@@ -43,6 +43,7 @@
             </div>
             <div id="employeeLogin" class="signIn <c:if test="${type ne 'employee'}">hidden</c:if>">
                 <h2>Employee Sign In</h2>
+                <form action="employeesignin" method="post" id="employeeLoginForm">
                 <p class="loginInstruction">Username and password both required. </p>
                 <span id="employeeLoginError" class="redText hidden"></span>
                 <br/>
@@ -50,9 +51,10 @@
                 <br/>
                 <label for="ePassWord">Password:</label><input id="ePassWord" class="signInSpacing signInInput" name="epassword" type="password" />
                 <br/>
+                </form>
                 <button id="ecancel" class="cancelButton signInSpacing">Cancel</button>
                 <button id="elogin" class="login signInSpacing">Sign In</button>
-            </div>
+           </div>
             <div id="adminLogin" class="signIn <c:if test="${type ne 'admin'}">hidden</c:if>">
                 <h2>Administrator Sign In</h2>
                 <p class="loginInstruction">Username and password both required. </p>
@@ -114,6 +116,7 @@
                 <p>Fields marked with <span class="required">*</span> are required.  Username must only be characters a-z,A-Z,0-9.  Password must be 8 or more characters and contain at least 1 letter and 1 digit.</p>
                 <span id="eRegError"></span>
                 <div class="registerContainer">
+                <form action="employeeregister" method="post" id="employeeRegisterForm">
                     <span class="required">*</span><label for="eUName">User Name:</label><input id="eUName" class="registerSpacing" name="euserName" type="text"/>
                     <br/>
                     <span class="required">*</span><label for="ePassword">Password:</label><input id="ePassword" name="epassword" class="registerSpacing" type="password"/>
@@ -124,23 +127,27 @@
                     <br/>
                     <span class="required">*</span><label for="eLastName">Last Name:</label><input id="eLastName" class="registerSpacing" name="elastName" type="text"/>
                     <br/>
+                    <span class="required">*</span><label for="eWage">Wage:</label><input id="eWage" class="registerSpacing" name="ewage" type="text"/>
+                    <br/>
+                    <span class="required">*</span><label for="eAirline">Airline:</label><input id="eAirline" class="registerSpacing" name="eairline" type="text"/>
+                    <br/>
                     <span class="required">*</span><label for="eBirthday">Birth date:</label><input id="eBirthday" class="registerSpacing" name="ebirthDate" type="date"/>
                     <br/>
-                    <label>Gender:</label><label for="eGenderM" class="gm">M:</label><input type="radio" id="eGenderM" class="registerSpacing" name="egender" value="m"/><label for="eGenderF">F:</label><input id="eGenderF" name="eGender" type="radio" value="f"/>
+                    <span class="required">*</span><label>Gender:</label><label for="eGenderM" class="gm">M:</label><input type="radio" id="eGenderM" class="registerSpacing" name="egender" value="m"/><label for="eGenderF">F:</label><input id="eGenderF" name="eGender" type="radio" value="f"/>
                     <br/>
                     <span class="required">*</span><label for="eEmail">Email:</label><input id="eEmail" class="registerSpacing" name="eemail" type="email"/>
                     <br/>
-                    <label for="ePhone">Phone:</label><input id="ePhone" class="registerSpacing" name="pphone" type="text"/>
+                    <span class="required">*</span><label for="ePhone">Phone:</label><input id="ePhone" class="registerSpacing" name="ephone" type="text"/>
                     <br/>
-                    <label for="eStreet">Street:</label><input id="eStreet" class="registerSpacing" name="estreet" type="text"/>
+                    <span class="required">*</span><label for="eStreet">Street:</label><input id="eStreet" class="registerSpacing" name="estreet" type="text"/>
                     <br/>
-                    <label for="eCity">City:</label><input id="eCity" class="registerSpacing" name="ecity" type="text"/>
+                    <span class="required">*</span><label for="eCity">City:</label><input id="eCity" class="registerSpacing" name="ecity" type="text"/>
                     <br/>
-                    <label for="eState">State:</label><input id="eState" class="registerSpacing" name="estateProvinceCounty" type="text"/>
+                    <span class="required">*</span><label for="eState">State:</label><input id="eState" class="registerSpacing" name="estateProvinceCounty" type="text"/>
                     <br/>
-                    <label for="eCountry">Country:</label><input id="eCountry" class="registerSpacing" name="ecountry" type="text"/>
+                    <span class="required">*</span><label for="eCountry">Country:</label><input id="eCountry" class="registerSpacing" name="ecountry" type="text"/>
                     <br/>
-                    
+                    </form>
                     <button id="eRegCancel" class="cancelButton">Cancel</button>
                     <button id="eRegister" class="login">Register</button>
                 </div>
@@ -185,16 +192,7 @@
         	$("#passLoginForm").submit();
         });
         $("#elogin").click(function(){
-            $("#employeeLoginError").val("");
-            
-            if($("#eUserName").val() == "clark" && $("#ePassWord").val() == '1234')
-            {
-                window.location = "EmployeeDashboard.html";
-            }
-            else
-            {
-                $("#employeeLoginError").text("Invalid username/password combination").show();
-            }
+        	$("#employeeLoginForm").submit();
         });
         $("#alogin").click(function(){
             $("#adminLoginError").val("");
@@ -218,7 +216,7 @@
             var userNameRegEx=/^[a-zA-Z0-9]+$/;
             if(!userNameRegEx.exec(userName))
             {
-                $("#pRegError").text("Username field is empty.").show();
+                $("#pRegError").text("Username field is empty or invalid.").show();
                 $(this).focus();
             }
             else
@@ -347,7 +345,7 @@
             var userNameRegEx=/^[a-zA-Z0-9]+$/;
             if(!userNameRegEx.exec(userName))
             {
-                $("#eRegError").text("Username field is empty.").show();
+                $("#eRegError").text("Username field is empty or invalid.").show();
                 $(this).focus();
             }
             else
@@ -421,8 +419,8 @@
             }
         });
         $("#eRegister").click(function(){
-            var userName = $("#eUserName").val();
-            var userNameRegEx=/^[a-zA-Z0-9]+$/;
+            var userName = $("#eUName").val();
+            var userNameRegEx=/^[a-zA-Z0-9]+$/;            
             var pass = $("#ePassword").val();
             var passwordRegEx = /^(?=.*\a)(?=.*\d).{8,}/;
             var firstName = $("#eFirstName").val();
@@ -464,8 +462,9 @@
                 $("#eRegError").text("Invalid email address.").show();
                 $(this).focus();
             }
-            $("#eUName, #ePassword, #eFirstName, #eMiddleName, #eLastName, #eBirthday, #eEmail, #eCity, #eState, #eCountry").val("");
+            //$("#eUName, #ePassword, #eFirstName, #eMiddleName, #eLastName, #eBirthday, #eEmail, #eCity, #eState, #eCountry").val("");
             
+            $('#employeeRegisterForm').submit();
         });
         $("#eRegCancel").click(function(){
            $("#registerEmployee").hide();
@@ -473,6 +472,9 @@
         });
         $("#plogin").click(function(){
         	$('#passLoginForm').submit();
+        });	
+        $("#elogin").click(function(){
+        	$('#employeeLoginForm').submit();
         });	
     </script>
 </body>

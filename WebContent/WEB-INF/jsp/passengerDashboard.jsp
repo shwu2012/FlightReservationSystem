@@ -42,7 +42,7 @@
                             <span>First Name:</span>
                         </td>
                         <td class="custInfo">
-                            <span id="pfn" ><c:out value="${passenger.firstName}" /></span>  
+                            <span id="pfn" ><c:out value="${passenger.firstName}" /></span>
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                             <span >Middle Name:</span>
                         </td>
                         <td class="custInfo">
-                            <span id="pmn" ><c:out value="${passenger.middleName}" /></span>  
+                            <span id="pmn" ><c:out value="${passenger.middleName}" /></span>
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@
                             <span>Last Name:</span>
                         </td>
                         <td class="custInfo">
-                            <span id="pln"><c:out value="${passenger.lastName}" /></span>  
+                            <span id="pln"><c:out value="${passenger.lastName}" /></span>
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +66,7 @@
                             <span>Email:</span>
                         </td>
                         <td class="custInfo">
-                            <span id="pem" class="custInfo"><c:out value="${passenger.email}" /></span>  
+                            <span id="pem" class="custInfo"><c:out value="${passenger.email}" /></span>
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +74,7 @@
                             <span>Phone:</span>
                         </td>
                         <td class="custInfo">
-                            <span id="pph" ><c:out value="${passenger.phone}" /></span> 
+                            <span id="pph" ><c:out value="${passenger.phone}" /></span>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                             <span>Street:</span>
                         </td>
                         <td class="custInfo">
-                            <span id="pst" ><c:out value="${passenger.street}" /></span> 
+                            <span id="pst" ><c:out value="${passenger.street}" /></span>
                         </td>
                     </tr>
                     <tr>
@@ -108,13 +108,14 @@
                         <td class="custInfo">
                             <span id="pc"><c:out value="${passenger.country}" /></span>
                         </td>
-                    </tr>    
+                    </tr>
                 </table>
-                
+
             </div>
         </c:when>
         <c:when test="${param.show eq 'editPassengerInfo'}">
             <div id="editPassengerInfo">
+                <form action="editInfo" method="post" id="editInfoForm">
                 <h2>Edit Passenger Information</h2>
                 <p>Fields marked with <span class="required">*</span> are required.</p>
                 <div id="registerPassenger" class="register">
@@ -130,6 +131,7 @@
                     <label for="pCountry">Country:</label><input id="pCountry" class="registerSpacing" name="pcountry" type="text"/><br/>
                 </div>
                 <button id="pEditInfo" class="login">Submit</button>
+                </form>
             </div>
         </c:when>
         <c:when test="${param.show eq 'makeReservation'}">
@@ -145,7 +147,7 @@
                         <option value="B">Business</option>
                         <option value="E">Economy</option>
                         <option value="F">First</option>
-                    </select>        
+                    </select>
                     <label for="resDate1">Date:</label><input id="resDate1" type="date" name="departDate" />
                     <button class="searchButton" id="searchFlights1">Search</button>
                 </div>
@@ -177,26 +179,26 @@
                 </div>
                 <div id="cancelRoundTrip">
                     <p>Enter Reservation numbers to cancel:</p>
-                    <label for="resNum1Way">Depart Reservation Number: </label><input type="text" id="resNum1Way" name="departReservationNumber" /><button id="cancelDepart" class="cancelReservation">Cancel reservation</button> 
+                    <label for="resNum1Way">Depart Reservation Number: </label><input type="text" id="resNum1Way" name="departReservationNumber" /><button id="cancelDepart" class="cancelReservation">Cancel reservation</button>
                     <br/>
                     <br/>
-                    <label for="resNum2way">Retrun Reservation Number: </label><input type="text" id="resNum2way" name="returnReservationNumber" /><button id="cancelReturn" class="cancelReservation">Cancel reservation</button> 
+                    <label for="resNum2way">Retrun Reservation Number: </label><input type="text" id="resNum2way" name="returnReservationNumber" /><button id="cancelReturn" class="cancelReservation">Cancel reservation</button>
                 </div>
              </div>
         </c:when>
-        <c:when test="${param.show eq 'viewAirports'}">    
+        <c:when test="${param.show eq 'viewAirports'}">
             <div id="viewAirports">
                 <h2>View Airports</h2>
                 <p>View airports info goes here.</p>
             </div>
         </c:when>
-        <c:when test="${param.show eq 'viewAirlinesPerAirport'}">    
+        <c:when test="${param.show eq 'viewAirlinesPerAirport'}">
             <div id="viewAirlinesPerAirport">
                 <h2>View Airlines Per Airport</h2>
                 <p>View airlines per airport info goes here.</p>
             </div>
         </c:when>
-        </c:choose>    
+        </c:choose>
         </div>
         <script type="text/javascript">
         	/*
@@ -274,7 +276,7 @@
                 var width = $("#roundTripReturns").width();
                 $("#reserveRoundTrip, #departFlightsLabel, #returnFlightsLabel").width(width);
             });
-            
+
             $("#cr1way").change(function(){
                 $("#cancelOneWay").show();
                 $("#cancelRoundTrip").hide();
@@ -296,8 +298,11 @@
                 $("#editPassengerInfo").hide();
             });
             $("#searchFlights").click(function(){
-	           	$('#searchFlightsForm').submit();
-            });            
+                $('#searchFlightsForm').submit();
+            });
+            $("#editInfo").click(function(){
+                $('#editInfoForm').submit();
+            });
         </script>
     </div>
 </body>

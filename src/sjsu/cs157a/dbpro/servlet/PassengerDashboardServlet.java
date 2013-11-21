@@ -35,6 +35,7 @@ public class PassengerDashboardServlet extends HttpServlet {
 		if (req.getParameter("show").equals("viewCustomerInfo")) {
 			String username = (String) req.getSession()
 					.getAttribute("username");
+
 			Connection conn = DbConnection.openConnection();
 
 			ResultSet rs = null;
@@ -88,14 +89,14 @@ public class PassengerDashboardServlet extends HttpServlet {
 		}
 		else if (req.getParameter("show").equals("cancelReservation")){
 			// TODO
-		} 
+		}
 		else if (req.getParameter("show").equals("viewAirports")){
 			// TODO
-		} 
+		}
 		else if (req.getParameter("show").equals("viewAirlinesPerAirport")){
 			// TODO
-		} 
-		
+		}
+
 		// Forward to view (i.e. JSP pages).
 		logger.info("forward to passengerDashboard.jsp");
 		req.getRequestDispatcher("/WEB-INF/jsp/passengerDashboard.jsp")

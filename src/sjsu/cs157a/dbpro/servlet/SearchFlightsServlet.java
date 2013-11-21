@@ -49,11 +49,16 @@ public class SearchFlightsServlet extends HttpServlet {
 		List<Ticket> tickets = new ArrayList<Ticket>();
 		String departureAirportCode = null;
 		String arrivalAirportCode = null;
-		
+
+		List<Ticket> returnTickets = null;
+		if (reservationType == "roundTrip") {
+			returnTickets = new ArrayList<Ticket>();
+		}
+
 		try {
 			prepStmt = conn.prepareStatement(sql);
 			prepStmt.setString(1, departureCity);
-			prepStmt.setString(2, arrivalCity);			
+			prepStmt.setString(2, arrivalCity);
 			// a date in in the format "yyyy-mm-dd"
 			prepStmt.setDate(3, Date.valueOf(departDate));
 			prepStmt.setString(4, seatClass);
@@ -65,13 +70,37 @@ public class SearchFlightsServlet extends HttpServlet {
 				ticket.setAirlineName(rs.getString("airlineName"));
 				ticket.setFlightNumber(rs.getString("flightNumber"));
 				ticket.setDepartureTime(rs.getTime("departureTime"));
-				ticket.setArrivalTime(rs.getTime("arrivalTime"));			
+				ticket.setArrivalTime(rs.getTime("arrivalTime"));
 				ticket.setPrice(rs.getFloat("price"));
 				ticket.setAvailableSeats(rs.getInt("availableSeats"));
 				tickets.add(ticket);
 				departureAirportCode = rs.getString("departureAirportCode");
 				arrivalAirportCode = rs.getString("arrivalAirportCode");
-			}	
+			}
+
+			if (reservationType == "roundTrip") {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, arrivalCity);
+				prepStmt.setString(2, departureCity);
+				// a date in in the format "yyyy-mm-dd"
+				prepStmt.setDate(3, Date.valueOf(returnDate));
+				prepStmt.setString(4, seatClass);
+				// test sql
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				while (rs.next()){
+					Ticket ticket = new Ticket();
+					ticket.setAirlineName(rs.getString("airlineName"));
+					ticket.setFlightNumber(rs.getString("flightNumber"));
+					ticket.setDepartureTime(rs.getTime("departureTime"));
+					ticket.setArrivalTime(rs.getTime("arrivalTime"));
+					ticket.setPrice(rs.getFloat("price"));
+					ticket.setAvailableSeats(rs.getInt("availableSeats"));
+					returnTickets.add(ticket);
+					departureAirportCode = rs.getString("departureAirportCode");
+					arrivalAirportCode = rs.getString("arrivalAirportCode");
+				}
+			}
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
@@ -92,6 +121,12 @@ public class SearchFlightsServlet extends HttpServlet {
 		req.setAttribute("departureAirportCode", departureAirportCode);
 		req.setAttribute("arrivalAirportCode", arrivalAirportCode);
 		req.setAttribute("tickets", tickets);
+
+		if (reservationType == "roundTrip") {
+			logger.info("tickets count: " + returnTickets.size());
+			req.setAttribute("departDate", Date.valueOf(returnDate));
+			req.setAttribute("returnTickets", returnTickets);
+		}
 
 		// Forward to view (i.e. JSP pages).
 		req.getRequestDispatcher("/WEB-INF/jsp/oneWaySearchResult.jsp").forward(req, resp);
