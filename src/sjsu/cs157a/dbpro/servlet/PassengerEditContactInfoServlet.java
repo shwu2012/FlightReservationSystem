@@ -135,7 +135,7 @@ public class PassengerEditContactInfoServlet extends HttpServlet
 						resp);
 			}*/
 		
-		req.getRequestDispatcher("/WEB-INF/jsp/editContactInfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/jsp/passengerEditContactInfo.jsp").forward(req, resp);
 	}
 
 }
