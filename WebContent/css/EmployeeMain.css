@@ -43,6 +43,11 @@ body {
 	background-color: #4791FF;
 	cursor: pointer;
 	color: #000;
+	text-decoration: none;
+}
+
+.redText {
+	color: #FF0000;
 }
 
 #menuItems {
@@ -96,40 +101,6 @@ body {
 	margin-top: 10px;
 }
 
-.searchButton {
-	padding: 4px;
-	font-size: 14px;
-	border-radius: 5px;
-	background-color: #228B22;
-}
-
-.searchButton:hover {
-	background-color: #32CD32;
-}
-
-.reserve {
-	padding: 4px;
-	font-size: 15px;
-	border-radius: 5px;
-	background-color: #228B22;
-	margin-top: 10px;
-}
-
-.reserve:hover {
-	background-color: #32CD32;
-}
-
-.cancelReservation {
-	padding: 4px;
-	font-size: 15px;
-	border-radius: 5px;
-	background-color: #6495ED;
-}
-
-.cancelReservation:hover {
-	background-color: #87CEFA;
-}
-
 button {
 	font-size: 16px;
 	color: #FFF;
@@ -141,36 +112,22 @@ button {
 	background-color: #4791FF;
 }
 
-#registerPassenger {
-	width: 300px;
-	margin: auto;
-	text-align: right;
-}
-
 .hidden {
 	display: none;
 }
 
-.custInfo {
+.empInfo {
 	text-align: left;
 	padding: 5px;
 }
 
-.custInfoLabel {
+.empInfoLabel {
 	text-align: right;
 	padding: 5px;
 }
 
-table#pinfo {
+table#einfo {
 	margin: auto;
-}
-
-.shortInput {
-	width: 70px;
-}
-
-.shortDateInput {
-	width: 135px;
 }
 
 .center {
@@ -181,20 +138,6 @@ table#pinfo {
 	font-weight: bold;
 }
 
-.tableBorder {
-	border: 1px solid #000;
-}
-
-.flightSearchResults {
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-.flightSearchResults td {
-	padding: 5px;
-	border: 1px solid #000;
-}
-
 .textAlignLeft {
 	text-align: left;
 }
@@ -203,11 +146,8 @@ table#pinfo {
 	text-align: right;
 }
 
-#departFlightsLabel,#returnFlightsLabel {
-	font-weight: bold;
-	margin-top: 15px;
-}
-
-#roundTripDepartures,#roundTripReturns {
-	margin-top: 5px;
+#registerEmployee {
+	width: 300px;
+	margin: auto;
+	text-align: right;
 }
