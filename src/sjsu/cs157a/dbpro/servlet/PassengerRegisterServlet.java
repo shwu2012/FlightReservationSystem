@@ -17,16 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.Helper;
+import sjsu.cs157a.dbpro.domain.Person;
 
 /**
  * Servlet implementation class RegisterServlet
  */
-public class RegisterServlet extends HttpServlet {
+public class PassengerRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = Logger.getLogger(RegisterServlet.class);	
+	private static final Logger logger = Logger.getLogger(PassengerRegisterServlet.class);	
 	
-	public static int baseNumber = 0; 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -52,7 +53,9 @@ public class RegisterServlet extends HttpServlet {
 		
 		// Calculate passengerID auto increment.
 		int passengerCount = 0;
-		try {
+		logger.info("passengerCount: " + passengerCount);
+		
+		/*try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select count(*) from passenger");
 			while (rs.next()) {
@@ -67,8 +70,49 @@ public class RegisterServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}*/
+		
+		
+		PreparedStatement prepStmt1 = null;
+		String sql1 = "select passengerCount from record";
+				
+
+		try {
+			prepStmt1 = conn.prepareStatement(sql1);
+			logger.info("prepStmt: " + prepStmt1.toString());
+			rs = prepStmt1.executeQuery();
+			if (rs.next()) {
+				passengerCount = rs.getInt("passengerCount");
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				prepStmt1.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
+		passengerCount++;
+		logger.info("passengerCount: " + passengerCount);
+		int count = passengerCount;
+		
+		int magCount = 0;
+		String partID = "";
+		while (count > 0)
+		{
+			count /= 10;
+			magCount++;			
+		}
+		for (int i = 0; i < 9 - magCount; i++)
+		{
+			partID += "0";
+		}
+		logger.info("partID: " + partID);
+		String passengerID = "P" + partID + Integer.toString(passengerCount);
+				
 		// Calculate passenger age	
 		Date dateOfBirth = Date.valueOf(pbirthDate);
 		int age = calculateAgeByDOB(dateOfBirth);
@@ -97,7 +141,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		try {
 			prepStmt = conn.prepareStatement(sql);
-			prepStmt.setString(1, "P" + Integer.toString(passengerCount));
+			prepStmt.setString(1, passengerID);
 			prepStmt.setString(2, puserName);
 			prepStmt.setString(3, ppassword);
 			prepStmt.setString(4, plastName);

@@ -18,10 +18,10 @@ import sjsu.cs157a.dbpro.db.DbConnection;
 /**
  * Servlet implementation class SignInServlet
  */
-public class SignInServlet extends HttpServlet {
+public class PassengerSignInServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(SignInServlet.class);
+	private static final Logger logger = Logger.getLogger(PassengerSignInServlet.class);
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
