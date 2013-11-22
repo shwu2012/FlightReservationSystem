@@ -1,0 +1,9 @@
+P000000001	janesmith	JES!ddf	Smith	Jane	Elaine	20	1993-09-15	F	janesmith@gmail.com	650-123-4567	600 Brewster Avenue	Redwood City	California	USA	
+P000000002	imaswimmer	dakotasis	Peterson	Claire	Alice	28	1985-05-12	F	cpeterson@gmail.com	801-897-6324	300 N.Street	Provo	Utah	USA	
+P000000003	tsirwinsj	acfd!<3l	Irwin	Todd	Steven	45	1969-11-27	M	irwintodd@yahoo.com	408-654-1597	300 San Fernando Street	San Jose	California	USA	
+P000000004	hrirwin	kids!<3f	Irwin	Heather	Renae	43	1970-07-16	F	irwinheat@yahoo.com	408-654-1598	300 San Fernando Street	San Jose	California	USA	
+P000000005	queLinda	cabMexdfs	Perez	Miroslaba	Elena	25	1988-10-02	F	perezm@ymail.com	null	335 Paseo de San Carlos	Caborca	Sonora	Mexico	
+P000000006	duetcheman	gjh87sdf	Govaars	Johann	Henrik	78	1934-11-19	M	gjh@msn.com	510-789-7619	2101 Willow Ave #B	Alameda	California	USA	
+P000000007	sequoiaGrad	rwc4everd	Rodriguez	Brigham	Jesus	15	1998-01-25	M	br10293@ymail.com	650-987-2635	354 Franklin St #202	Redwood City	California	USA	
+P000000008	jtgreen	reen$e$de	Green	Tyler	James	65	1948-02-28	M	tygreenme@hotmail.com	650-987-6431	413 Torino Way	San Carlos	California	USA	
+P000000009	musicman	luvthe#b	Stevens	Evan	Jay	35	1978-06-30	M	jes@sbcglobal.net	212-452-7163	3672 A Street	New York City	New York	USA	
