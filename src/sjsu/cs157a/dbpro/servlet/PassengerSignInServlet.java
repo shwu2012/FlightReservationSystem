@@ -21,7 +21,8 @@ import sjsu.cs157a.dbpro.db.DbConnection;
 public class PassengerSignInServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(PassengerSignInServlet.class);
+	private static final Logger logger = Logger
+			.getLogger(PassengerSignInServlet.class);
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

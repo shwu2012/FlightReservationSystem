@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
-import sjsu.cs157a.dbpro.domain.Helper;
-import sjsu.cs157a.dbpro.domain.Person;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -26,8 +24,9 @@ import sjsu.cs157a.dbpro.domain.Person;
 public class PassengerRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = Logger.getLogger(PassengerRegisterServlet.class);	
-	
+	private static final Logger logger = Logger
+			.getLogger(PassengerRegisterServlet.class);	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 public class AdministratorDashboardServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger
+	private static final Logger logger = Logger
 			.getLogger(AdministratorDashboardServlet.class);
 
 	/**

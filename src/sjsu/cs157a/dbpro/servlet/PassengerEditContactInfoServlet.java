@@ -3,11 +3,9 @@ package sjsu.cs157a.dbpro.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,17 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
-import sjsu.cs157a.dbpro.domain.Passenger;
 
 /**
  * Servlet implementation class EditContactInfoServlet
  */
-@WebServlet("/EditContactInfoServlet")
-public class PassengerEditContactInfoServlet extends HttpServlet 
-{
+public class PassengerEditContactInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private static Logger logger = Logger.getLogger(PassengerEditContactInfoServlet.class);   
+	private static final Logger logger = Logger
+			.getLogger(PassengerEditContactInfoServlet.class);
+
     /**
      * @see HttpServlet#HttpServlet()
      */

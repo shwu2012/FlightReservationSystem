@@ -22,7 +22,8 @@ import sjsu.cs157a.dbpro.domain.Ticket;
 public class SearchFlightsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(SearchFlightsServlet.class);
+	private static final Logger logger = Logger
+			.getLogger(SearchFlightsServlet.class);
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

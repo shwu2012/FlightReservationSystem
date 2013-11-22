@@ -2,16 +2,13 @@ package sjsu.cs157a.dbpro.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,12 +17,10 @@ import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
 import sjsu.cs157a.dbpro.domain.Reservation;
-import sjsu.cs157a.dbpro.domain.Ticket;
 
 /**
  * Servlet implementation class MakeReservationServlet
  */
-@WebServlet("/MakeReservationServlet")
 public class MakeReservationServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;

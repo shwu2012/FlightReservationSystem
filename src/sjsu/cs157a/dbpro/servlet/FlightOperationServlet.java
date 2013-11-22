@@ -18,7 +18,7 @@ import sjsu.cs157a.dbpro.db.DbConnection;
 
 public class FlightOperationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger
+	private static final Logger logger = Logger
 			.getLogger(FlightOperationServlet.class);
 
 	/**

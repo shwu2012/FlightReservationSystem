@@ -23,8 +23,9 @@ import sjsu.cs157a.dbpro.db.DbConnection;
  */
 public class EmployeeRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(EmployeeRegisterServlet.class);
-	
+	private static final Logger logger = Logger
+			.getLogger(EmployeeRegisterServlet.class);
+
     /**
      * @see HttpServlet#HttpServlet()
      */

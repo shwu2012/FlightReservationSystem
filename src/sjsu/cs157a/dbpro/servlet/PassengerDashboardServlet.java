@@ -26,7 +26,7 @@ import sjsu.cs157a.dbpro.domain.Reservation;
 public class PassengerDashboardServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger
+	private static final Logger logger = Logger
 			.getLogger(PassengerDashboardServlet.class);
 
 	/**

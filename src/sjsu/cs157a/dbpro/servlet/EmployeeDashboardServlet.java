@@ -22,8 +22,9 @@ import sjsu.cs157a.dbpro.domain.Person;
  */
 public class EmployeeDashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger
-			.getLogger(EmployeeDashboardServlet.class);   
+	private static final Logger logger = Logger
+			.getLogger(EmployeeDashboardServlet.class);
+
     /**
      * @see HttpServlet#HttpServlet()
      */
