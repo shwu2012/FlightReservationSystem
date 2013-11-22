@@ -54,6 +54,14 @@
     <servlet-class>sjsu.cs157a.dbpro.servlet.FlightOperationServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>ticketOperation</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.TicketOperationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>employeeOperation</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.EmployeeOperationServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>sjsu.cs157a.dbpro.servlet.LogoutServlet</servlet-class>
   </servlet>
