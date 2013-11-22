@@ -29,10 +29,6 @@ public class PassengerDashboardServlet extends HttpServlet {
 	private static final Logger logger = Logger
 			.getLogger(PassengerDashboardServlet.class);
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		if (req.getParameter("show").equals("viewCustomerInfo")) {

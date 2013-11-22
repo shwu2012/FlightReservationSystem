@@ -1,6 +1,8 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
 <head>
     <title>Administrator Dashboard</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
@@ -50,6 +52,11 @@
             padding: 0;
             border: 1px solid #555;
             border-radius: 3px;
+        }
+        .menuItems a
+        {
+            color: white;
+            text-decoration: none;
         }
         .modOption
         {
@@ -104,10 +111,6 @@
         {
             background-color: #E3E3E3;
             cursor: pointer;
-        }
-        #modifications
-        {
-            display: none;
         }
         #welcome
         {
@@ -211,17 +214,11 @@
         #modMenu
         {
             width: 250px;
+            float: left;
         }
         #modCommands
         {
-            position: absolute;
-            top: -30px;
-            left: 350px;
-            padding: 10px;
-        }
-        #modifications
-        {
-            position: relative;
+            padding: 10px 10px 10px 260px;
         }
         .reserve
         {
@@ -259,12 +256,29 @@
         </div>
         <div id="menu" class="centerText">
             <ul id="mainMenu" class="menuItems">
-                <li class="menuOption" id="m">Modifications</li>
-                <li class="menuOption" id="s">Statisitcs</li>
-                <li class="menuOption" id="archive">Archive Database</li>
+                <li class="menuOption"><a href="administratordashboard?show=view">View</a></li>
+                <li class="menuOption"><a href="administratordashboard?show=modifications">Modifications</a></li>
+                <li class="menuOption"><a href="administratordashboard?show=statistics">Statistics</a></li>
+                <li class="menuOption"><a href="administratordashboard?show=archive">Archive Database</a></li>
             </ul>
         </div>
         <div id="contentArea">
+        <c:choose>
+        <c:when test="${param.show eq 'view'}">
+            <!-- view container -->
+            <div id="view">
+                <div id="modMenu">
+                <h3>View Selection:</h3>
+                <ul id="modItems" class="menuItems">
+                    <li class="modOption">Employee</li>
+                    <li class="modOption">Flight</li>
+                    <li class="modOption">Ticket</li>
+                </ul>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </c:when>
+        <c:when test="${param.show eq 'modifications'}">
             <!-- modifications container -->
             <div id="modifications">
                 <div id="modMenu">
@@ -295,33 +309,6 @@
                                 <div class="whiteTriangleLeft" ></div>Insert Ticket</li>
                             <li id="UT" class="innerModOptionItem">Update Ticket</li>
                             <li id="DT" class="innerModOptionItem">Delete Ticket</li>
-                        </ul>
-                    </li>
-                    <li class="modOption">Airport<div class="blackTriangleRight"></div>
-                        <ul id="airportMods" class="menuItems innerModOption">
-                            <li id="IA" class="innerModOptionItem">
-                                <div class="greyTriangleLeft"></div>
-                                <div class="whiteTriangleLeft" ></div>Insert Airport</li>
-                            <li id="UA" class="innerModOptionItem">Update Airport</li>
-                            <li id="DA" class="innerModOptionItem">Delete Airport</li>
-                        </ul>
-                    </li>
-                    <li class="modOption">Airline<div class="blackTriangleRight"></div>
-                        <ul id="airlineMods" class="menuItems innerModOption">
-                            <li id="IAL" class="innerModOptionItem">
-                                <div class="greyTriangleLeft"></div>
-                                <div class="whiteTriangleLeft" ></div>Insert Airline</li>
-                            <li id="UAL" class="innerModOptionItem">Update Airline</li>
-                            <li id="DAL" class="innerModOptionItem">Delete Airline</li>
-                        </ul>
-                    </li>
-                    <li class="modOption">Aircraft<div class="blackTriangleRight"></div>
-                        <ul id="aircraftMods" class="menuItems innerModOption">
-                            <li id="IAC" class="innerModOptionItem">
-                                <div class="greyTriangleLeft"></div>
-                                <div class="whiteTriangleLeft" ></div>Insert Aircraft</li>
-                            <li id="UAC" class="innerModOptionItem">Update Aircraft</li>
-                            <li id="DAC" class="innerModOptionItem">Delete Aircraft</li>
                         </ul>
                     </li>
                 </ul>
@@ -420,6 +407,7 @@
                     <div id="insertFlight" class="hidden">
                     <h4>Add Flight:</h4>
                     <form action="flightoperation?op=insert" method="post" id="addFlightForm">
+                      <div>
                         <label for="flightNum">Flight Number:</label><input id="flightNum" type="text" name="flightNumber" />
                         <br/>
                         <label for="acode">Airline Code:</label><input id="acode" type="text" name="airlineCode" />
@@ -434,10 +422,11 @@
                         <br/>
                         <label for="arriveTime">Arrival Time:</label><input id="arriveTime" type="time" name="arrivalTime" />
                         <br/>
-                        <label for="overnight">Arrival Time:</label><input id="overnight" type="checkbox" name="overnight" value="1"/>
+                        <label for="overnight">Overnight:</label><input id="overnight" type="checkbox" name="overnight" value="yes"/>
                         <div class="centerText">
                             <button class="reserve insert">Add Flight</button>
                         </div>
+                      </div>
                     </form>
                     </div>
                     <div id="updateFlight" class="hidden">
@@ -579,10 +568,12 @@
 
 
                 </div>
+                <div style="clear:both"></div>
             </div>
-
+        </c:when>
+        <c:when test="${param.show eq 'statistics'}">
             <!-- statistics container -->
-            <div id="statistics" class="hidden">
+            <div id="statistics">
                 <div id="statMenu">
                     <ul id="statsOptions" class="center">
                         <li class="statOption">View flight number, departure date, and average age of passengers for all flights of a given airline.
@@ -639,166 +630,111 @@
 
                 </div>
             </div>
-
+        </c:when>
+        <c:when test="${param.show eq 'archive'}">
             <!--archive message container-->
-            <div id="archiveMessage" class="centerText hidden">
-
+            <div id="archiveMessage">
+              TODO: archive message shows here
             </div>
+        </c:when>    
+        </c:choose>
         </div>
-        <script type="text/javascript">
-            //show modification options on menu button click
-            $("#m").click(function(){
-                $("#modifications").show();
-                $("#statistics, #archiveMessage").hide();
-            });
-            //show statistics options on menu button click
-            $("#s").click(function(){
-                $("#statistics").show();
-                $("#modifications, #archiveMessage").hide();
-            });
-            //display message when archive button is clicked
-            $("#archive").click(function(){
-                $("#modifications, #statistics").hide();
-                $("#archiveMessage").html("<h4>Message:</h4><p>Database archiving performed successfully.</p>").show();
-            });
+    </div>    
+    <script type="text/javascript">
+        //display sub-menu lists on main list items hover
+        $(".modOption").hover(function(){
+            $(this).children("ul").show();
+            $(this).children("div").addClass("blackTriangleDown");
+        }, function(){
+            $(this).children("ul").hide();
+            $(this).children("div").removeClass("blackTriangleDown");
+        });
 
-            //display sub-menu lists on main list items hover
-            $(".modOption").hover(function(){
-                $(this).children("ul").show();
-                $(this).children("div").addClass("blackTriangleDown");
-            }, function(){
-                $(this).children("ul").hide();
-                $(this).children("div").removeClass("blackTriangleDown");
-            });
+        //handle click events for Employee update and delete options
+        $("#UE").click(function(){
+           $("modCommands").children().hide();
+           $("#updateWage").show();
+        });
+        $("#DE").click(function(){
+           $("#modCommands").children().hide();
+           $("#deleteEmployee").show();
+        });
 
-            //handle click events for Employee update and delete options
-            $("#UE").click(function(){
-               $("modCommands").children().hide();
-               $("#updateWage").show();
-            });
-            $("#DE").click(function(){
-               $("#modCommands").children().hide();
-               $("#deleteEmployee").show();
-            });
+        //handle click events for Ticket insert, update, and delete options
+        $("#IT").click(function(){
+           $("#modCommands").children().hide();
+           $("#insertTicket").show();
+        });
+        $("#UT").click(function(){
+           $("#modCommands").children().hide();
+           $("#updateTicket").show();
+        });
+        $("#DT").click(function(){
+           $("#modCommands").children().hide();
+           $("#deleteTicket").show();
+        });
 
-            //handle click events for Ticket insert, update, and delete options
-            $("#IT").click(function(){
-               $("#modCommands").children().hide();
-               $("#insertTicket").show();
-            });
-            $("#UT").click(function(){
-               $("#modCommands").children().hide();
-               $("#updateTicket").show();
-            });
-            $("#DT").click(function(){
-               $("#modCommands").children().hide();
-               $("#deleteTicket").show();
-            });
+        //handle click events for Flight insert, update, and delete options
+        $("#IF").click(function(){
+           $("#modCommands").children().hide();
+           $("#insertFlight").show();
+        });
+        $("#UF").click(function(){
+           $("#modCommands").children().hide();
+           $("#updateFlight").show();
+        });
+        $("#DF").click(function(){
+           $("#modCommands").children().hide();
+           $("#deleteFlight").show();
+        });
 
-            //handle click events for Flight insert, update, and delete options
-            $("#IF").click(function(){
-               $("#modCommands").children().hide();
-               $("#insertFlight").show();
-            });
-            $("#UF").click(function(){
-               $("#modCommands").children().hide();
-               $("#updateFlight").show();
-            });
-            $("#DF").click(function(){
-               $("#modCommands").children().hide();
-               $("#deleteFlight").show();
-            });
+        //display messages for when insert, update, and delete buttons are clicked
+        //YOU NEED TO ADD THE DATABASE FUNCTIONS HERE AND DISPLAY MESSAGE IF SUCCESSFUL
+        /*
+        $(".insert").click(function(){
+           $("#modCommands").children().hide();
+           $("#message").html("<h4>Message:</h4><p>Insert performed successfully.</p>").show();
+        });
+        $(".update").click(function(){
+           $("#modCommands").children().hide();
+           $("#message").html("<h4>Message:</h4><p>Update performed successfully.</p>").show();
+        });
+        $(".delete").click(function(){
+           $("#modCommands").children().hide();
+           $("#message").html("<h4>Message:</h4><p>Delete performed successfully.</p>").show();
+        });
+        */
 
-            //handle click events for Airport insert, update, and delete options
-            $("#IA").click(function(){
-               $("#modCommands").children().hide();
-               $("#insertAirport").show();
-            });
-            $("#UA").click(function(){
-               $("#modCommands").children().hide();
-               $("#updateAirport").show();
-            });
-            $("#DA").click(function(){
-               $("#modCommands").children().hide();
-               $("#deleteAirport").show();
-            });
+        //handle hover event of statistic list items
+        $(".statOption").click(function(){
+            $(this).children("div").slideToggle();
+        });
 
-            //handle click events for Airline insert, update, and delete options
-            $("#IAL").click(function(){
-               $("#modCommands").children().hide();
-               $("#insertAirline").show();
-            });
-            $("#UAL").click(function(){
-               $("#modCommands").children().hide();
-               $("#updateAirline").show();
-            });
-            $("#DAL").click(function(){
-               $("#modCommands").children().hide();
-               $("#deleteAirline").show();
-            });
-
-            //handle click events for Aircraft insert, update, and delete options
-            $("#IAC").click(function(){
-               $("#modCommands").children().hide();
-               $("#insertAircraft").show();
-            });
-            $("#UAC").click(function(){
-               $("#modCommands").children().hide();
-               $("#updateAircraft").show();
-            });
-            $("#DAC").click(function(){
-               $("#modCommands").children().hide();
-               $("#deleteAircraft").show();
-            });
-
-            //display messages for when insert, update, and delete buttons are clicked
-            //YOU NEED TO ADD THE DATABASE FUNCTIONS HERE AND DISPLAY MESSAGE IF SUCCESSFUL
-            $(".insert").click(function(){
-               $("#modCommands").children().hide();
-               $("#message").html("<h4>Message:</h4><p>Insert performed successfully.</p>").show();
-            });
-            $(".update").click(function(){
-               $("#modCommands").children().hide();
-               $("#message").html("<h4>Message:</h4><p>Update performed successfully.</p>").show();
-            });
-            $(".delete").click(function(){
-               $("#modCommands").children().hide();
-               $("#message").html("<h4>Message:</h4><p>Delete performed successfully.</p>").show();
-            });
-
-            //handle hover event of statistic list items
-            $(".statOption").hover(function(){
-                $(this).children("div").slideToggle();
-            }, function(){
-                $(this).children("div").slideToggle()
-            });
-
-            $("#stat1").click(function(){
-               $("#statCommands").html("<p>Stat 1 result here.</p>").show();
-            });
-            $("#stat2").click(function(){
-               $("#statCommands").html("<p>Stat 2 result here.</p>").show();
-            });
-            $("#stat3").click(function(){
-               $("#statCommands").html("<p>Stat 3 result here.</p>").show();
-            });
-            $("#stat4").click(function(){
-               $("#statCommands").html("<p>Stat 4 result here.</p>").show();
-            });
-            $("#stat5").click(function(){
-               $("#statCommands").html("<p>Stat 5 result here.</p>").show();
-            });
-            $("#stat6").click(function(){
-               $("#statCommands").html("<p>Stat 6 result here.</p>").show();
-            });
-            $("#stat7").click(function(){
-               $("#statCommands").html("<p>Stat 7 result here.</p>").show();
-            });
-            $("#stat8").click(function(){
-               $("#statCommands").html("<p>Stat 8 result here.</p>").show();
-            });
-
-        </script>
+        $("#stat1").click(function(){
+           $("#statCommands").html("<p>Stat 1 result here.</p>").show();
+        });
+        $("#stat2").click(function(){
+           $("#statCommands").html("<p>Stat 2 result here.</p>").show();
+        });
+        $("#stat3").click(function(){
+           $("#statCommands").html("<p>Stat 3 result here.</p>").show();
+        });
+        $("#stat4").click(function(){
+           $("#statCommands").html("<p>Stat 4 result here.</p>").show();
+        });
+        $("#stat5").click(function(){
+           $("#statCommands").html("<p>Stat 5 result here.</p>").show();
+        });
+        $("#stat6").click(function(){
+           $("#statCommands").html("<p>Stat 6 result here.</p>").show();
+        });
+        $("#stat7").click(function(){
+           $("#statCommands").html("<p>Stat 7 result here.</p>").show();
+        });
+        $("#stat8").click(function(){
+           $("#statCommands").html("<p>Stat 8 result here.</p>").show();
+        });
+    </script>
 
 </body>
 </html>

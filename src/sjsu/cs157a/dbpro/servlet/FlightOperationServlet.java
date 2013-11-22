@@ -3,9 +3,7 @@ package sjsu.cs157a.dbpro.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +25,7 @@ public class FlightOperationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (req.getParameter("op").equals("insert")){
+		if (req.getParameter("op").equals("insert")) {
 			String flightNumber = req.getParameter("flightNumber");
 			String airlineCode = req.getParameter("airlineCode");
 			String aircraftModel = req.getParameter("aircraftModel");
@@ -35,24 +33,15 @@ public class FlightOperationServlet extends HttpServlet {
 			String arrivalAirportCode = req.getParameter("arrivalAirportCode");
 			String departureTime = req.getParameter("departureTime");
 			String arrivalTime = req.getParameter("arrivalTime");
-			boolean isOvernight = req.getParameter("overnight") == null;
-			
+			boolean isOvernight = req.getParameter("overnight") != null;
+
 			Connection conn = DbConnection.openConnection();
-			
+
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
-			String sql = "Insert into flight "
-					+ "values ("
-					+ "?, "
-					+ "?, "
-					+ "?, "
-					+ "?, "
-					+ "?, "
-					+ "?, "
-					+ "?, "
-					+ "?"
-					+ ")";
-			
+			String sql = "Insert into flight " + "values (" + "?, " + "?, "
+					+ "?, " + "?, " + "?, " + "?, " + "?, " + "?" + ")";
+
 			try {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setString(1, flightNumber);
@@ -60,8 +49,8 @@ public class FlightOperationServlet extends HttpServlet {
 				prepStmt.setString(3, aircraftModel);
 				prepStmt.setString(4, departAirportCode);
 				prepStmt.setString(5, arrivalAirportCode);
-				//prepStmt.setTime(6, departureTime);
-				//prepStmt.setTime(7, arrivalTime);
+				prepStmt.setString(6, departureTime);
+				prepStmt.setString(7, arrivalTime);
 				prepStmt.setBoolean(8, isOvernight);
 				// test sql
 				logger.info("prepStmt: " + prepStmt.toString());
@@ -78,18 +67,15 @@ public class FlightOperationServlet extends HttpServlet {
 				}
 			}
 
-			DbConnection.closeConnection(conn);			
-
-			if (sqlError == null) {
-
-			} else {
-				
-			}			
-			
-		} else if (req.getParameter("op").equals("update")){
-			
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
+					req, resp);
+		} else if (req.getParameter("op").equals("update")) {
+			// TODO
 		} else {
-			
+			// TODO
 		}
 	}
 }

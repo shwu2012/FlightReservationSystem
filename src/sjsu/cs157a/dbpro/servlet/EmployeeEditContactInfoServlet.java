@@ -23,14 +23,6 @@ public class EmployeeEditContactInfoServlet extends HttpServlet {
 			.getLogger(PassengerEditContactInfoServlet.class);   
 
 	/**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeEditContactInfoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

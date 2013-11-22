@@ -18,13 +18,10 @@ public class AdministratorDashboardServlet extends HttpServlet {
 	private static final Logger logger = Logger
 			.getLogger(AdministratorDashboardServlet.class);
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+		req.getRequestDispatcher("/WEB-INF/jsp/administratorDashboard.jsp")
+				.forward(req, resp);
 	}
 
 }
