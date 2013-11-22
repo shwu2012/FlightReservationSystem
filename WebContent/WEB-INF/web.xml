@@ -38,6 +38,14 @@
     <servlet-class>sjsu.cs157a.dbpro.servlet.EmployeeDashboardServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>administratorDashboard</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.AdministratorDashboardServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>flightOperation</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.FlightOperationServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>sjsu.cs157a.dbpro.servlet.LogoutServlet</servlet-class>
   </servlet>
@@ -76,6 +84,22 @@
    <servlet-mapping>
     <servlet-name>employeeDashboard</servlet-name>
     <url-pattern>/employeedashboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>administratorDashboard</servlet-name>
+    <url-pattern>/administratordashboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>employeeOperation</servlet-name>
+    <url-pattern>/employeeoperation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>flightOperation</servlet-name>
+    <url-pattern>/flightoperation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ticketOperation</servlet-name>
+    <url-pattern>/ticketoperation</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>logout</servlet-name>
