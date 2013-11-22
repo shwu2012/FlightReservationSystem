@@ -47,6 +47,7 @@
                         No tickets found.
                     </c:when>
                     <c:otherwise>
+                    <form action="makeReservation" method="post" id="reservationForm">
                         <table id="oneWayResults" class="flightSearchResults center tableBorder">
                             <tr class="bold">
                                 <td>Airline</td><td>Flight #</td><td>Depart Time</td><td>Arrive Time</td><td>Price</td><td># of Seats</td><td>Select</td>
@@ -63,8 +64,10 @@
                             </tr>
                             </c:forEach>
                         </table>
+                        <input type="hidden" name="reservationType" value="oneWay" />
+                        </form>
                         <div id="reserveOneWay" class="center textAlignRight" >
-                            <button class="reserve">Reserve Flight</button>
+                            <button id="reserve" class="reserve">Reserve Flight</button>
                         </div>
                     </c:otherwise>
                     </c:choose>    
@@ -73,5 +76,10 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+                $("#reserve").click(function(){
+	           	$('#reservationForm').submit();
+            });
+    </script>
 </body>
 </html>

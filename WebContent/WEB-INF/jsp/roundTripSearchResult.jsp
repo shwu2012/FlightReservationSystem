@@ -43,6 +43,7 @@
                 <div id="roundTripSearch">
                     <div id="roundTripFlights">
                         <div id="departFlightsLabel" class="textAlignLeft center">Departing flights:</div>
+                        <form action="makeReservation" method="post" id="reservationForm">
                         <table id="roundTripDepartures" class="flightSearchResults center tableBorder">
                             <tr class="bold">
                                 <td>Airline</td><td>Flight #</td><td>Depart Time</td><td>Arrive Time</td><td>Price</td><td># of Seats</td><td>Select</td>
@@ -76,12 +77,20 @@
                             </tr>
                             </c:forEach>
                         </table>
+                        <input type="hidden" name="reservationType" value="roundTrip" />
+                        </form>
                         <div id="reserveRoundTrip" class ="center textAlignRight" >
-                            <button class="reserve">Reserve Flights</button>
+                            <button id="reserve" class="reserve">Reserve Flights</button>
                         </div>
                     </div>
                 </div>
         </div>
     </div>
+    <script type="text/javascript">
+                $("#reserve").click(function(){
+	           	$('#reservationForm').submit();
+            });
+    </script>
 </body>
+
 </html>
