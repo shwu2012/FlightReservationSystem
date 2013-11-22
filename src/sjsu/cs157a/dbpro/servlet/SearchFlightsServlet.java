@@ -28,18 +28,27 @@ public class SearchFlightsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String reservationType = req.getParameter("reservationType");
-		String departureCity = req.getParameter("departureCity");
-		String arrivalCity = req.getParameter("arrivalCity");
-		String departDate = req.getParameter("departDate");
-		String seatClass = req.getParameter("seatClass");
+		String departureCity = null;
+		String arrivalCity = null;
+		String departDate = null;
+		String seatClass = null;
 		String returnDate = null;
-		if (reservationType == "roundTrip") {
-			returnDate = req.getParameter("returnDate");
+		if (reservationType.equals("roundTrip")) {
+			returnDate = req.getParameter("returnDate2");
+			departureCity = req.getParameter("departureCity2");
+			arrivalCity = req.getParameter("arrivalCity2");
+			departDate = req.getParameter("departDate2");
+			seatClass = req.getParameter("seatClass2");			
+		} else {
+			departureCity = req.getParameter("departureCity");
+			arrivalCity = req.getParameter("arrivalCity");
+			departDate = req.getParameter("departDate");
+			seatClass = req.getParameter("seatClass");				
 		}
 
 		Connection conn = DbConnection.openConnection();
 		PreparedStatement prepStmt = null;
-		String sql = "select airlineName, flightNumber, departureAirportCode, arrivalAirportCode, departureTime, arrivalTime, price, availableSeats "
+		String sql = "select airlineName, flightNumber, departureAirportCode, arrivalAirportCode, departureTime, arrivalTime, price, availableSeats, ticketID "
 				+ "from flight natural join ticket natural join airline where "
 				+ "departureAirportCode = (select airportCode from airport where city = ?) and "
 				+ "arrivalAirportCode = (select airportCode from airport where city = ?) and "
@@ -51,7 +60,7 @@ public class SearchFlightsServlet extends HttpServlet {
 		String arrivalAirportCode = null;
 
 		List<Ticket> returnTickets = null;
-		if (reservationType == "roundTrip") {
+		if (reservationType.equals("roundTrip")) {
 			returnTickets = new ArrayList<Ticket>();
 		}
 
@@ -67,6 +76,7 @@ public class SearchFlightsServlet extends HttpServlet {
 			rs = prepStmt.executeQuery();
 			while (rs.next()){
 				Ticket ticket = new Ticket();
+				ticket.setTicketID(rs.getString("ticketID"));
 				ticket.setAirlineName(rs.getString("airlineName"));
 				ticket.setFlightNumber(rs.getString("flightNumber"));
 				ticket.setDepartureTime(rs.getTime("departureTime"));
@@ -78,7 +88,7 @@ public class SearchFlightsServlet extends HttpServlet {
 				arrivalAirportCode = rs.getString("arrivalAirportCode");
 			}
 
-			if (reservationType == "roundTrip") {
+			if (reservationType.equals("roundTrip")) {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setString(1, arrivalCity);
 				prepStmt.setString(2, departureCity);
@@ -90,6 +100,7 @@ public class SearchFlightsServlet extends HttpServlet {
 				rs = prepStmt.executeQuery();
 				while (rs.next()){
 					Ticket ticket = new Ticket();
+					ticket.setTicketID(rs.getString("ticketID"));
 					ticket.setAirlineName(rs.getString("airlineName"));
 					ticket.setFlightNumber(rs.getString("flightNumber"));
 					ticket.setDepartureTime(rs.getTime("departureTime"));
@@ -122,14 +133,19 @@ public class SearchFlightsServlet extends HttpServlet {
 		req.setAttribute("arrivalAirportCode", arrivalAirportCode);
 		req.setAttribute("tickets", tickets);
 
-		if (reservationType == "roundTrip") {
+		if (reservationType.equals("roundTrip")) {
 			logger.info("tickets count: " + returnTickets.size());
-			req.setAttribute("departDate", Date.valueOf(returnDate));
+			req.setAttribute("returnDate", Date.valueOf(returnDate));
 			req.setAttribute("returnTickets", returnTickets);
 		}
 
 		// Forward to view (i.e. JSP pages).
-		req.getRequestDispatcher("/WEB-INF/jsp/oneWaySearchResult.jsp").forward(req, resp);
+		if (reservationType.equals("roundTrip")) {
+			req.getRequestDispatcher("/WEB-INF/jsp/roundTripSearchResult.jsp").forward(req, resp);
+		} else {
+			req.getRequestDispatcher("/WEB-INF/jsp/oneWaySearchResult.jsp").forward(req, resp);
+		}
+		
 	}
 
 }

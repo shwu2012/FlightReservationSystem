@@ -59,7 +59,7 @@
                                 <td><c:out value="${ticket.arrivalTime}"/></td>
                                 <td><c:out value="${ticket.price}"/></td>
                                 <td><c:out value="${ticket.availableSeats}"/></td>
-                                <td><input type="radio" name="flightSelected" /></td>
+                                <td><input type="radio" name="flightSelected" value="${ticket.ticketID}" /></td>
                             </tr>
                             </c:forEach>
                         </table>

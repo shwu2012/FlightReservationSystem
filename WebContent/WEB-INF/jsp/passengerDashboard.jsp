@@ -152,15 +152,15 @@
                     <button class="searchButton" id="searchFlights1">Search</button>
                 </div>
                 <div id="roundTripSearch" class="hidden">
-                    <label for="dSelect2">Departure: </label><input type="text" id="dSelect2" class="shortInput" name="departureDate" />
-                    <label for="aSelect2">Arrival: </label><input type="text" id="aSelect2" class="shortInput" name="arrivalCity" />
-                    <label for="seatClass2">Seat Class: </label><select id="seatClass2" name="seatClass">
+                    <label for="dSelect2">Departure: </label><input type="text" id="dSelect2" class="shortInput" name="departureCity2" />
+                    <label for="aSelect2">Arrival: </label><input type="text" id="aSelect2" class="shortInput" name="arrivalCity2" />
+                    <label for="seatClass2">Seat Class: </label><select id="seatClass2" name="seatClass2">
                         <option value="B">Business</option>
                         <option value="E">Economy</option>
                         <option value="F">First</option>
                     </select>
-                    <label for="resDate2">Depart Date:</label><input id="resDate2" type="date" class="shortDateInput" name="departDate" />
-                    <label for="resDate3">Return Date:</label><input id="resDate3" type="date" class="shortDateInput" name="returnDate" />
+                    <label for="resDate2">Depart Date:</label><input id="resDate2" type="date" class="shortDateInput" name="departDate2" />
+                    <label for="resDate3">Return Date:</label><input id="resDate3" type="date" class="shortDateInput" name="returnDate2" />
                     <button class="searchButton" id="searchFlights2">Search</button>
                 </div>
                 </form>
@@ -266,6 +266,7 @@
                 $("#roundTripSearch").show();
                 $("#oneWayFlights, #roundTripFlights").hide();
             });
+            /*
             $("#searchFlights1").click(function(){
                 $("#oneWayFlights").show();
                 var width = $("#oneWayResults").width();
@@ -276,6 +277,7 @@
                 var width = $("#roundTripReturns").width();
                 $("#reserveRoundTrip, #departFlightsLabel, #returnFlightsLabel").width(width);
             });
+            */
 
             $("#cr1way").change(function(){
                 $("#cancelOneWay").show();
@@ -297,9 +299,12 @@
                 $("#infoEditSuccessful").text("Information edited successfully.").show();
                 $("#editPassengerInfo").hide();
             });
-            $("#searchFlights").click(function(){
+            $("#searchFlights1").click(function(){
                 $('#searchFlightsForm').submit();
             });
+            $("#searchFlights2").click(function(){
+                $('#searchFlightsForm').submit();
+            });            
             $("#editInfo").click(function(){
                 $('#editInfoForm').submit();
             });

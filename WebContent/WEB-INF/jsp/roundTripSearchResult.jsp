@@ -33,7 +33,13 @@
         </div>
         <div id="contentArea">
                 <h2>Round trip reservation</h2>
-                <h3>TODO</h3>
+                <div>
+                <c:out value="Departure: ${departureCity} (${departureAirportCode})" /><br/>          
+                <c:out value="Arrival: ${arrivalCity} (${arrivalAirportCode})" /><br/>
+                <c:out value="Depart Date: ${departDate}" /><br/>
+                <c:out value="Return Date: ${returnDate}" /><br/>
+                <c:out value="Seat Class: ${seatClass}" />
+                </div>
                 <div id="roundTripSearch">
                     <div id="roundTripFlights">
                         <div id="departFlightsLabel" class="textAlignLeft center">Departing flights:</div>
@@ -41,30 +47,34 @@
                             <tr class="bold">
                                 <td>Airline</td><td>Flight #</td><td>Depart Time</td><td>Arrive Time</td><td>Price</td><td># of Seats</td><td>Select</td>
                             </tr>
+                            <c:forEach items="${tickets}" var="ticket" varStatus="status">
                             <tr>
-                                <td>United Airlines</td><td>UA858</td><td>13:20:00</td><td>15:25:00</td><td>600.5</td><td>19</td><td><input type="radio" name="flightSelected" /></td>
+                                <td><c:out value="${ticket.airlineName}"/></td>
+                                <td><c:out value="${ticket.flightNumber}"/></td>
+                                <td><c:out value="${ticket.departureTime}"/></td>
+                                <td><c:out value="${ticket.arrivalTime}"/></td>
+                                <td><c:out value="${ticket.price}"/></td>
+                                <td><c:out value="${ticket.availableSeats}"/></td>
+                                <td><input type="radio" name="departFlightSelected" value="${ticket.ticketID}" /></td>
                             </tr>
-                            <tr>
-                                <td>United Airlines</td><td>UA858</td><td>13:20:00</td><td>15:25:00</td><td>600.5</td><td>19</td><td><input type="radio" name="flightSelected" /></td>
-                            </tr>
-                            <tr>
-                                <td>United Airlines</td><td>UA858</td><td>13:20:00</td><td>15:25:00</td><td>600.5</td><td>19</td><td><input type="radio" name="flightSelected" /></td>
-                            </tr>
+                            </c:forEach>
                         </table>
                         <div id="returnFlightsLabel" class="textAlignLeft center">Return flights:</div>
                         <table id="roundTripReturns" class="flightSearchResults center tableBorder">
                             <tr class="bold">
                                 <td>Airline</td><td>Flight #</td><td>Depart Time</td><td>Arrive Time</td><td>Price</td><td># of Seats</td><td>Select</td>
                             </tr>
+                            <c:forEach items="${returnTickets}" var="ticket" varStatus="status">
                             <tr>
-                                <td>United Airlines</td><td>UA858</td><td>13:20:00</td><td>15:25:00</td><td>600.5</td><td>19</td><td><input type="radio" name="flightSelected" /></td>
+                                <td><c:out value="${ticket.airlineName}"/></td>
+                                <td><c:out value="${ticket.flightNumber}"/></td>
+                                <td><c:out value="${ticket.departureTime}"/></td>
+                                <td><c:out value="${ticket.arrivalTime}"/></td>
+                                <td><c:out value="${ticket.price}"/></td>
+                                <td><c:out value="${ticket.availableSeats}"/></td>
+                                <td><input type="radio" name="returnFlightSelected" value="${ticket.ticketID}" /></td>
                             </tr>
-                            <tr>
-                                <td>United Airlines</td><td>UA858</td><td>13:20:00</td><td>15:25:00</td><td>600.5</td><td>19</td><td><input type="radio" name="flightSelected" /></td>
-                            </tr>
-                            <tr>
-                                <td>United Airlines</td><td>UA858</td><td>13:20:00</td><td>15:25:00</td><td>600.5</td><td>19</td><td><input type="radio" name="flightSelected" /></td>
-                            </tr>
+                            </c:forEach>
                         </table>
                         <div id="reserveRoundTrip" class ="center textAlignRight" >
                             <button class="reserve">Reserve Flights</button>
