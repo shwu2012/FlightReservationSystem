@@ -6,6 +6,10 @@
     <servlet-class>sjsu.cs157a.dbpro.servlet.SearchFlightsServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>makeReservation</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.MakeReservationServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>passengerEditInfo</servlet-name>
     <servlet-class>sjsu.cs157a.dbpro.servlet.PassengerEditContactInfoServlet</servlet-class>
   </servlet>
@@ -46,6 +50,10 @@
     <url-pattern>/searchflights</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>makeReservation</servlet-name>
+    <url-pattern>/makeReservation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>passengerEditInfo</servlet-name>
     <url-pattern>/editInfo</url-pattern>
   </servlet-mapping>
@@ -65,7 +73,7 @@
     <servlet-name>passengerRegister</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>employeeRegister</servlet-name>
     <url-pattern>/employeeregister</url-pattern>
   </servlet-mapping>
@@ -73,7 +81,7 @@
     <servlet-name>passengerDashboard</servlet-name>
     <url-pattern>/passengerdashboard</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>employeeDashboard</servlet-name>
     <url-pattern>/employeedashboard</url-pattern>
   </servlet-mapping>
