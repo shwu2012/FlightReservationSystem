@@ -10,6 +10,10 @@
     <servlet-class>sjsu.cs157a.dbpro.servlet.MakeReservationServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>cancelReservation</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.CancelReservationServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>passengerEditInfo</servlet-name>
     <servlet-class>sjsu.cs157a.dbpro.servlet.PassengerEditContactInfoServlet</servlet-class>
   </servlet>
@@ -52,6 +56,10 @@
   <servlet-mapping>
     <servlet-name>makeReservation</servlet-name>
     <url-pattern>/makeReservation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>cancelReservation</servlet-name>
+    <url-pattern>/cancelReservation</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>passengerEditInfo</servlet-name>
