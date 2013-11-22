@@ -1,0 +1,24 @@
+PEK	Capital	Beijing	China
+PVG	Pu Dong	Shanghai	China
+CAN	Baiyun	Guangzhou	China
+ZTY	BKBAY Rail	Boston	United States
+ORD	OHare	Chicago	United States
+IOW	Iowa City	Iowa City	United States
+LRF	Little Rock Afb	Jacksonville	United States
+KCK	Fairfax Municipal	Kansas City	United States
+LSD	Creech AAF	Lexington	United States
+TNT	Dade Collier	Miami	United States
+HVN	New Haven	New Haven	United States
+DWN	Downtown Airpark	Oklahoma City	United States
+PHL	Philadelphia International	Philadelphia	United States
+RCR	Fulton County	Rochester	United States
+SLC	International	Salt Lake City	United States
+SYS	Yeosu	Suncheon	Korea (South)
+RSU	Yeosu	Yeosu	Korea (South)
+SFO	San Francisco International	San Francisco	United States
+HNL	International	Honolulu	United States
+NRT	Narita	Tokyo	Japan
+KIX	Kansai	Osaka	Japan
+HKG	International	Hongkong	China
+LAX	International	Los Angeles	United States
+ICN	Incheon International	Seoul	Korea (South)

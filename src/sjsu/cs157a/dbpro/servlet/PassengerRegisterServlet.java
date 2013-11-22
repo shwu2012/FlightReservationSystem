@@ -135,7 +135,6 @@ public class PassengerRegisterServlet extends HttpServlet {
 				+ "?, "
 				+ "?, "
 				+ "?, "
-				+ "?, "
 				+ "?"
 				+ ")";
 		
@@ -157,7 +156,6 @@ public class PassengerRegisterServlet extends HttpServlet {
 			prepStmt.setString(13, pcity);
 			prepStmt.setString(14, pstateProvinceCounty);
 			prepStmt.setString(15, pcountry);
-			prepStmt.setInt(16, 0);
 			// test sql
 			logger.info("prepStmt: " + prepStmt.toString());
 			prepStmt.executeUpdate();

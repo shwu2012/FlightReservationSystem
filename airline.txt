@@ -1,0 +1,12 @@
+KE	Korean Airlines
+CI	China Airlines
+MU	China Eastern Airlines
+CJ	China Northern Airlines
+CZ	China Southern Airlines
+SZ	China Southwest Airlines
+AS	Alaska Airlines
+AA	American Airlines
+DL	Delta Airlines
+UA	United Airlines
+JP	Japan Airlines
+

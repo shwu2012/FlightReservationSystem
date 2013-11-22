@@ -1,0 +1,10 @@
+E000000001	SW455	JOODY	Wood	Judy	Maria	F	47	1966-01-13	37.00	jmwood@gmail.com	602-559-9463	756 Walkwood Way	Phoenix	AZ	USA	UA
+E000000002	SW687	Water	Pinnell	Richard	Blake	M	26	1986-12-02	27.50	btoons@hotmail.com	707-855-2214	712 Ashford Court	Vacaville	CA	USA	AA
+E000000003	SW521	puppies	Mallery	Evelyn	Louise	F	32	1981-06-15	42.00	eve287@gmail.com	916-848-7743	890 "B" Street #4	Folsom	CA	USA	UA
+E000000004	SW908	june10	McMing	Deborah	Toone	F	28	1984-02-30	16.00	booklvr@yahoo.com	216-996-2330	2313 Highland Avenue	Cleveland	OH	USA	AA
+E000000005	SW675	lakers	Zazzi	Sally	May	F	52	1961-07-07	52.00	pilot55@sbcglobal.net	208-454-3632	78 Locust Street	Shelly	ID	USA	DL
+E000000006	SW302	hct6789	Kimsey	Greg	Michael	M	60	1961-03-06	60.00	flier99@gmail.com	510-650-9622	9087 Willow Street #35	Alameda	CA	USA	AS
+E000000007	SW098	green	Jensen	Thor	Brian	M	23	1990-10-30	26.00	thunderman@gmail.com	650-877-5456	2101 Arch St	Redwood City	CA	USA	CI
+E000000008	SW796	hud6543	Gill	Holly	Sarah	F	25	1987-11-01	27.50	qwerty8770@hotmail.com	408-988-0834	765 Tully Road	San Jose	CA	USA	KE
+E000000009	SW321	ijn90l	Vargas	Mike	Tom	M	37	1976-08-19	40.00	klowdy@byu.edu	801-772-7689	200 S Main Street	Provo	UT	USA	JP
+E000000010	SW456	power	Hawkins	Dave	Harry	M	57	1956-05-16	72.00	inthesky@gmail.com	405-912-1234	2789 Folsom Street	San Francisco	CA	USA	MU
