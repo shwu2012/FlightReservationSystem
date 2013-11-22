@@ -27,8 +27,7 @@
                 <li class="menuOption" id="ec"><a href="passengerdashboard?show=editPassengerInfo">Edit contact info</a></li>
                 <li class="menuOption" id="mr"><a href="passengerdashboard?show=makeReservation">Make a reservation</a></li>
                 <li class="menuOption" id="cr"><a href="passengerdashboard?show=cancelReservation">Cancel a reservation</a></li>
-                <li class="menuOption" id="va"><a href="passengerdashboard?show=viewAirports">View airports</a></li>
-                <li class="menuOption" id="vaa"><a href="passengerdashboard?show=viewAirlinesPerAirport">View airlines per airport</a></li>
+                <li class="menuOption" id="va"><a href="passengerdashboard?show=viewReservations">View reservations</a></li>
             </ul>
         </div>
         <div id="contentArea">
@@ -168,28 +167,50 @@
         </c:when>
         <c:when test="${param.show eq 'cancelReservation'}">
             <div id="cancelReservation">
+            <form action="cancelReservation" method="post" id="cancelReservationForm">
                 <h2>Cancel a reservation</h2>
-                <label for="cr1way">One Way:</label><input id="cr1way" name="cancelType" type="radio"/>
-                <label for="cr2way">Round trip:</label><input id="cr2way" name="cancelType" type="radio" />
                 <br/>
-                <div id="cancelOneWay" class="center">
+                <div id="cancelOneWay">
                     <p>Enter a reservation number to cancel:</p>
                     <label for="resNumber">Reservation number: </label><input type="text" id="resNumber" name="reservationNumber"/>
                     <button class="cancelReservation" id="cancelRes">Cancel Reservation</button>
-                </div>
-                <div id="cancelRoundTrip">
-                    <p>Enter Reservation numbers to cancel:</p>
-                    <label for="resNum1Way">Depart Reservation Number: </label><input type="text" id="resNum1Way" name="departReservationNumber" /><button id="cancelDepart" class="cancelReservation">Cancel reservation</button>
-                    <br/>
-                    <br/>
-                    <label for="resNum2way">Retrun Reservation Number: </label><input type="text" id="resNum2way" name="returnReservationNumber" /><button id="cancelReturn" class="cancelReservation">Cancel reservation</button>
-                </div>
+                </div>                
+             </form>
              </div>
         </c:when>
-        <c:when test="${param.show eq 'viewAirports'}">
-            <div id="viewAirports">
-                <h2>View Airports</h2>
-                <p>View airports info goes here.</p>
+        <c:when test="${param.show eq 'viewReservations'}">
+            <div id="viewReservations">
+                <h2>View Reservations</h2>
+                <table class="center flightSearchResults">
+                    <tr class="bold">
+                        <td>Reservation<br/>Number</td>
+                            <td>Flight<br/>Number</td>
+                            <td>Airline</td>
+                            <td>Departure<br/>Airport</td>
+                            <td>Departure<br/>Date</td>
+                            <td>Departure<br/>Time</td>
+                            <td>Arrival<br/>Airport</td>
+                            <td>Arrival<br/>Date</td>
+                            <td>Arrival<br/>Time</td>
+                            <td>Seat<br/>Class</td>
+                            <td>Price</td>
+                    </tr>
+                    <c:forEach items="${reservations}" var="reservation" varStatus="status">
+                            <tr>
+                                <td><c:out value="${reservation.reservationID}"/></td>
+                                <td><c:out value="${reservation.flightNumber}"/></td>
+                                <td><c:out value="${reservation.airlineName}"/></td>
+                                <td><c:out value="${reservation.departureAirportCode}"/></td>
+                                <td><c:out value="${reservation.departureDate}"/></td>
+                                <td><c:out value="${reservation.departureTime}"/></td>
+                                <td><c:out value="${reservation.arrivalAirportCode}"/></td>
+                                <td><c:out value="${reservation.arrivalDate}"/></td>
+                                <td><c:out value="${reservation.arrivalTime}"/></td>
+                                <td><c:out value="${reservation.seatClass}"/></td>
+                                <td><c:out value="${reservation.price}"/></td>                                
+                            </tr>
+                   </c:forEach>
+                </table>
             </div>
         </c:when>
         <c:when test="${param.show eq 'viewAirlinesPerAirport'}">
@@ -308,6 +329,10 @@
             $("#editInfo").click(function(){
                 $('#editInfoForm').submit();
             });
+            $("#cancelRes").click(function(){
+                $('#cancelReservationForm').submit();
+            });
+
         </script>
     </div>
 </body>

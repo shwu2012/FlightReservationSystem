@@ -27,8 +27,7 @@
                 <li class="menuOption" id="ec"><a href="passengerdashboard?show=editPassengerInfo">Edit contact info</a></li>
                 <li class="menuOption" id="mr"><a href="passengerdashboard?show=makeReservation">Make a reservation</a></li>
                 <li class="menuOption" id="cr"><a href="passengerdashboard?show=cancelReservation">Cancel a reservation</a></li>
-                <li class="menuOption" id="va"><a href="passengerdashboard?show=viewAirports">View airports</a></li>
-                <li class="menuOption" id="vaa"><a href="passengerdashboard?show=viewAirlinesPerAirport">View airlines per airport</a></li>
+                <li class="menuOption" id="va"><a href="passengerdashboard?show=viewReservations">View reservations</a></li>
             </ul>
         </div>
         <div id="contentArea">

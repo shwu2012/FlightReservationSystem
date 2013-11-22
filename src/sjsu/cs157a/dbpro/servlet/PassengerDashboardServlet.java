@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ import org.apache.log4j.Logger;
 import sjsu.cs157a.dbpro.db.DbConnection;
 import sjsu.cs157a.dbpro.domain.Passenger;
 import sjsu.cs157a.dbpro.domain.Person;
+import sjsu.cs157a.dbpro.domain.Reservation;
 
 /**
  * Servlet implementation class PassengerDashboardServlet
@@ -90,12 +93,87 @@ public class PassengerDashboardServlet extends HttpServlet {
 		else if (req.getParameter("show").equals("cancelReservation")){
 			// TODO
 		}
-		else if (req.getParameter("show").equals("viewAirports")){
+		else if (req.getParameter("show").equals("viewReservations")){
 			// TODO
+			String username = (String) req.getSession()
+					.getAttribute("username");
+
+			String passengerID = null;
+			
+			Connection conn = DbConnection.openConnection();
+
+			ResultSet rs = null;
+			
+			PreparedStatement prepStmt = null;
+			String sql = "select passengerID from passenger "
+					+ "where username = ?";
+
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, username);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				rs.next();				
+				passengerID = rs.getString("passengerID");
+				}
+			 catch (SQLException se) {
+				se.printStackTrace();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			List<Reservation> reservations = new ArrayList<Reservation>();
+			String sql2 = "select reservationID, ticket.flightNumber, airlineCode, departureAirportCode, departureDate, departureTime, arrivalAirportCode, arrivalDate, arrivalTime, seatClass, price"
+					+ " from flight join ticket join reservation where "
+					+ "passengerID = ? and ticket.ticketID = reservation.ticketID and flight.flightNumber = ticket.flightNUmber";
+
+			try {
+				prepStmt = conn.prepareStatement(sql2);
+				prepStmt.setString(1, passengerID);
+				//prepStmt.setString(2, ticketID);
+				// test sql
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				while (rs.next())
+				{
+					Reservation reservation = new Reservation();
+
+					reservation.setReservationID(rs.getString("reservationID"));
+					reservation.setFlightNumber(rs.getString("flightNumber"));
+					reservation.setAirlineName(rs.getString("airlineCode"));
+					reservation.setDepartureAirportCode(rs
+							.getString("departureAirportCode"));
+					reservation.setDepartureDate(rs.getDate("departureDate"));
+					reservation.setDepartureTime(rs.getTime("departureTime"));
+					reservation.setArrivalAirportCode(rs
+							.getString("arrivalAirportCode"));
+					reservation.setArrivalDate(rs.getDate("arrivalDate"));
+					reservation.setArrivalTime(rs.getTime("arrivalTime"));
+					reservation.setSeatClass(rs.getString("seatClass"));
+					reservation.setPrice(rs.getFloat("price"));
+					reservations.add(reservation);
+				}
+			}
+			 catch (SQLException se) {
+				se.printStackTrace();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			DbConnection.closeConnection(conn);
+			req.setAttribute("reservations", reservations);			
 		}
-		else if (req.getParameter("show").equals("viewAirlinesPerAirport")){
-			// TODO
-		}
+		
 
 		// Forward to view (i.e. JSP pages).
 		logger.info("forward to passengerDashboard.jsp");
