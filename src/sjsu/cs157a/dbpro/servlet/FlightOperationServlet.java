@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +20,15 @@ public class FlightOperationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger
 			.getLogger(FlightOperationServlet.class);
-
+	private static final Map<String, String> sqlByAttr = new HashMap<String, String>();
+	static{
+		String sqlTemplate = "update flight set %s = ? where flightNumber = ?";
+		String[] attributes  = new String[]{"aircraftModel","departureTime", "arrivalTime"};
+		for(String s: attributes){
+			sqlByAttr.put(s, String.format(sqlTemplate, s));
+		}
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -73,9 +83,72 @@ public class FlightOperationServlet extends HttpServlet {
 					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
 					req, resp);
 		} else if (req.getParameter("op").equals("update")) {
-			// TODO
+			String flightAttribute = req.getParameter("flightAttribute");
+			String newAttributeValue = req.getParameter("newAttributeValue");
+			String flightNumber = req.getParameter("flightNumber");			
+			
+			Connection conn = DbConnection.openConnection();
+
+			PreparedStatement prepStmt = null;
+			String sqlError = null;
+			String sql = sqlByAttr.get(flightAttribute);
+
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, newAttributeValue);
+				prepStmt.setString(2, flightNumber);
+				// test sql
+				logger.info("prepStmt: " + prepStmt.toString());
+				prepStmt.executeUpdate();
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
+					req, resp);			
 		} else {
-			// TODO
+			String flightNumber = req.getParameter("flightNumber");			
+			
+			Connection conn = DbConnection.openConnection();
+
+			PreparedStatement prepStmt = null;
+			String sqlError = null;
+			String sql = "delete from flight where flightNumber = ?";
+
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, flightNumber);
+				// test sql
+				logger.info("prepStmt: " + prepStmt.toString());
+				prepStmt.executeUpdate();
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
+					req, resp);
 		}
 	}
 }

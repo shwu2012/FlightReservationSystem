@@ -323,21 +323,26 @@
                     <!--Employee Delete-->
                     <div id="updateWage" class="hidden">
                         <h4>Update Wage:</h4>
-                        <label for="Wage">New Wage:</label><input id="Wage" name="wage" type="text" />
+                        <form action="employeeoperation?op=update" method="post" id="updateEmployeeForm">
+                        <label for="Wage">New Wage:</label><input id="Wage" name="hourlyPay" type="text" />
                         <br/>
-                        <label for="ID" >For employee ID = </label><input id="ID" type="text" name="employeeID" />
+                        <label for="ID" >For employee Username = </label><input id="ID" type="text" name="employeeUsername" />
                         <div class="centerText">
                             <button class="reserve update">Update</button>
                         </div>
+                        </form>
                     </div>
                     <div id="deleteEmployee" class="hidden">
                         <h4>Delete Employee:</h4>
-                        <label for="employeeID">Employee ID:</label><input id="employeeID" type="text" name="employeeID" /><button class="reserve delete">Delete</button>
+                        <form action="employeeoperation?op=delete" method="post" id="deleteEmployeeForm">
+                        <label for="employeeID">Employee Username:</label><input id="employeeID" type="text" name="employeeUsername" /><button class="reserve delete">Delete</button>
+                        </form>
                     </div>
 
                     <!--Ticket insert, update, delete-->
                     <div id="insertTicket" class="hidden">
                         <h4>Add Ticket:</h4>
+                        <form action="ticketoperation?op=insert" method="post" id="insertTicketForm">
                         <label for="flightNum">Flight Number:</label><input id="flightNum" type="text" name="ticketFlightNumber" />
                         <br/>
                         <label for="dDate">Departure Date:</label><input id="dDate" type="date" name="departureDate" />
@@ -357,12 +362,13 @@
                         <div class="centerText">
                             <button class="reserve insert">Add Ticket</button>
                         </div>
+                        </form>
                     </div>
                     <div id="updateTicket" class="hidden">
                         <h4>Update Ticket:</h4>
+                        <form action="ticketoperation?op=update" method="post" id="updateTicketForm">
                         <label for="ticketAttr">Attribute to update:</label>
                         <select id="ticketAttr" name="ticketAttribute">
-                            <option value="flightNumber">Flight Number</option>
                             <option value="departureDate">Departure Date</option>
                             <option value="arrivalDate">Arrival Date</option>
                             <option value="seatClass">Seat class</option>
@@ -385,9 +391,11 @@
                         <div class="centerText">
                             <button class="reserve update">Update</button>
                         </div>
+                        </form>
                     </div>
                     <div id="deleteTicket" class="hidden">
                         <h4>Delete Ticket:</h4>
+                        <form action="ticketoperation?op=delete" method="post" id="deleteTicketForm">
                         <label for="f#">Flight Number:</label><input id="f#" type="text" name="flightNumber" />
                         <br/>
                         <label for="dd">Departure Date:</label><input id="dd" type="date" name="dDate" />
@@ -401,6 +409,7 @@
                         <div class="centerText">
                             <button class="reserve delete">Delete</button>
                         </div>
+                        </form>
                     </div>
 
                     <!--Flight insert, update, delete-->
@@ -431,28 +440,29 @@
                     </div>
                     <div id="updateFlight" class="hidden">
                         <h4>Update Flight:</h4>
+                        <form action="flightoperation?op=update" method="post" id="updateFlightForm">
                         <label for="flightAttr">Attribute to update:</label>
                         <select id="flightAttr" name="flightAttribute">
-                            <option value="flightNumber">Flight Number</option>
-                            <option value="airlineCode">Airline Code</option>
                             <option value="aircraftModel">Aircraft Model</option>
-                            <option value="departAirportCode">Departure Airport</option>
-                            <option value="arrivalAirportCode">Arrival Airport</option>
                             <option value="departureTime">Departure Time</option>
                             <option value="arrivalTime">Arrival Time</option>
                         </select>
                         <br/>
-                        <label for="aAttrVal">New Attribute Value:</label><input id="aAttrVal" name="airportAttributeValue" type="text"/>
+                        <label for="aAttrVal">New Attribute Value:</label><input id="newAttrValue" name="newAttributeValue" type="text"/>
                         <br/>
                         <label for="flightNum">For flight number =</label><input type="text" id="flightNum" name="flightNumber" />
                         <div class="centerText">
                             <button class="reserve update">Update</button>
                         </div>
+                        </form>    
                     </div>
                     <div id="deleteFlight" class="hidden">
                         <h4>Delete Flight:</h4>
+                        <form action="flightoperation?op=delete" method="post" id="deleteFlightForm">
                         <label for="flightNum">Flight number:</label><input id="flightNum" type="text" name="flightNumber" /><button class="reserve delete">Delete</button>
+                        </form>
                     </div>
+                    
 
                     <!--Airport Insert, Update, Delete-->
                     <div id="insertAirport" class="hidden">
