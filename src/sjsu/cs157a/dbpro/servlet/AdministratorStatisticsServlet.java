@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,21 +18,16 @@ import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
 import sjsu.cs157a.dbpro.domain.FirstStatistic;
-import sjsu.cs157a.dbpro.domain.Reservation;
 import sjsu.cs157a.dbpro.domain.SecondStatistic;
 
 /**
  * Servlet implementation class AdministratorStatisticsServlet
  */
-@WebServlet("/AdministratorStatisticsServlet")
 public class AdministratorStatisticsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger
 			.getLogger(AdministratorStatisticsServlet.class);   
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -46,35 +40,29 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		if (req.getParameter("order").equals("first"))
 		{
 			String airlineName = req.getParameter("airline_name");
-			sql = "select ticket.flightNumber, departureDate, avg(age) as avgAge"
+			sql = "select ticket.flightNumber, departureDate, avg(age) as avgAge "
 					+ "from ticket join reservation join flight join passenger "
 					+ "where ticket.ticketID = reservation.ticketID "
 					+ "and ticket.flightNUmber = flight.flightNUmber "
 					+ "and reservation.passengerID = passenger.passengerID "
 					+ "and airlineCode in (select airlineCode from airline where airlineName = ?) "
 					+ "group by ticket.flightnumber, departureDate";
-									
+				
+			List<FirstStatistic> firstStatistics = new ArrayList<FirstStatistic>();
 			try {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setString(1, airlineName);
-				
+				logger.info("prepStmt: " + prepStmt.toString());
 				rs = prepStmt.executeQuery();
-				
-				List<FirstStatistic> firstStatistics = new ArrayList<FirstStatistic>();
 				
 				while (rs.next())
 				{
 					FirstStatistic firstStatistic = new FirstStatistic();
-
 					firstStatistic.setFlightNumber(rs.getString("flightNumber"));
 					firstStatistic.setDepartureDate(Date.valueOf(rs.getString("departureDate")));
-					firstStatistic.setAvgAge(Integer.parseInt(rs.getString("avgAge")));
+					firstStatistic.setAvgAge(rs.getInt("avgAge"));
 					firstStatistics.add(firstStatistic);
 				}
-				
-				// test sql
-				logger.info("prepStmt: " + prepStmt.toString());
-				prepStmt.executeUpdate();
 			} catch (SQLException se) {
 				se.printStackTrace();
 				sqlError = se.getMessage();
@@ -88,6 +76,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("firstStatistics", firstStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult1.jsp").forward(
 					req, resp);
@@ -116,10 +105,10 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			try {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setString(1, departureAirportCode);
-				prepStmt.setString(1, arrivalAirportCode);
-				
+				prepStmt.setString(2, arrivalAirportCode);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
 				List<SecondStatistic> secondStatistics = new ArrayList<SecondStatistic>();
-				
 				while (rs.next())
 				{
 					SecondStatistic secondStatistic = new SecondStatistic();
