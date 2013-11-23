@@ -369,9 +369,6 @@
                         <form action="ticketoperation?op=update" method="post" id="updateTicketForm">
                         <label for="ticketAttr">Attribute to update:</label>
                         <select id="ticketAttr" name="ticketAttribute">
-                            <option value="departureDate">Departure Date</option>
-                            <option value="arrivalDate">Arrival Date</option>
-                            <option value="seatClass">Seat class</option>
                             <option value="availableSeats">Available Seats</option>
                             <option value="price">Seat Price</option>
                         </select>
