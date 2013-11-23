@@ -13,6 +13,5 @@ public class SecondStatistic
 	{
 		this.flightNumber = flightNumber;
 	}
-	
-	
+		
 }

@@ -17,8 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.EighthStatistic;
 import sjsu.cs157a.dbpro.domain.FirstStatistic;
+import sjsu.cs157a.dbpro.domain.FourthStatistic;
 import sjsu.cs157a.dbpro.domain.SecondStatistic;
+import sjsu.cs157a.dbpro.domain.SeventhStatistic;
+import sjsu.cs157a.dbpro.domain.ThirdStatistic;
 
 /**
  * Servlet implementation class AdministratorStatisticsServlet
@@ -100,7 +104,8 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 					+ "and flightNumber = (select flightnumber from Flight "
 					+ "where departureAirportCode = ? and arrivalAirportCode = ?) "
 					+ "group by flightnumber) R1) ";
-	
+			
+			List<SecondStatistic> secondStatistics = new ArrayList<SecondStatistic>();
 		
 			try {
 				prepStmt = conn.prepareStatement(sql);
@@ -108,17 +113,14 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 				prepStmt.setString(2, arrivalAirportCode);
 				logger.info("prepStmt: " + prepStmt.toString());
 				rs = prepStmt.executeQuery();
-				List<SecondStatistic> secondStatistics = new ArrayList<SecondStatistic>();
+				
 				while (rs.next())
 				{
 					SecondStatistic secondStatistic = new SecondStatistic();
 					secondStatistic.setFlightNumber(rs.getString("flightNumber"));
 					secondStatistics.add(secondStatistic);
 				}
-				
-				// test sql
-				logger.info("prepStmt: " + prepStmt.toString());
-				prepStmt.executeUpdate();
+								
 			} catch (SQLException se) {
 				se.printStackTrace();
 				sqlError = se.getMessage();
@@ -132,6 +134,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("secondStatistics", secondStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult2.jsp").forward(
 					req, resp);
@@ -140,26 +143,247 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		else if (req.getParameter("order").equals("third"))
 		{
 			
+			int age = Integer.parseInt(req.getParameter("age"));
+			String country = req.getParameter("country");
+			String flightNumber = req.getParameter("flightNumber");
+			
+			sql = "select firstName, lastName, email from passenger " +
+					"where age > ? and country <> ? and " +
+					"passengerID in (select passengerID FROM Reservation " +
+					"WHERE ticketID IN  (SELECT ticketID FROM Ticket WHERE  flightNumber = ?))";
+			
+			List<ThirdStatistic> thirdStatistics = new ArrayList<ThirdStatistic>();
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setInt(1, age);
+				prepStmt.setString(2, country);
+				prepStmt.setString(3, flightNumber);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				
+				while (rs.next())
+				{
+					ThirdStatistic thirdStatistic = new ThirdStatistic();
+					thirdStatistic.setFirstName(rs.getString("firstName"));
+					thirdStatistic.setLastName(rs.getString("lastName"));
+					thirdStatistic.setEmail(rs.getString("email"));
+					thirdStatistics.add(thirdStatistic);
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("thirdStatistics", thirdStatistics);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/administratorStatisticsResult3.jsp").forward(
+					req, resp);
+			
 		}
 		else if (req.getParameter("order").equals("fourth"))
 		{
-			
+			int age = Integer.parseInt(req.getParameter("age"));
+			sql = "select airlineName from airline where airlineCode in" +
+					" (select airlineCode from employee group by airlineCode having avg(age) > ?)";
+				
+			List<FourthStatistic> fourthStatistics = new ArrayList<FourthStatistic>();
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setInt(1, age);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				
+				while (rs.next())
+				{
+					FourthStatistic fourthStatistic = new FourthStatistic();
+					fourthStatistic.setAirlineName(rs.getString("airlineName"));
+					fourthStatistics.add(fourthStatistic);
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("fourthStatistics", fourthStatistics);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/administratorStatisticsResult4.jsp").forward(
+					req, resp);
 		}
 		else if (req.getParameter("order").equals("fifth"))
 		{
+			String airlineName = req.getParameter("airline_name");
+			String departureDate = req.getParameter("depart_date");
+			
+			sql = "select sum(price) as revenue from ticket natural join flight " 
+			    + "WHERE airlineCode = (SELECT airlineCode from airline where airlineName like ?) "
+				+ "AND departureDate = ?";
+		
+			String airlineName2 = "%" + airlineName + "%";
+			int revenue = 0;
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, airlineName2);
+				prepStmt.setString(2, departureDate);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				
+				rs.next();
+				revenue = rs.getInt("revenue");
+							
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("revenue", revenue);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/administratorStatisticsResult5.jsp").forward(
+					req, resp);
 			
 		}
 		else if (req.getParameter("order").equals("sixth"))
 		{
+			String flightNumber = req.getParameter("flightNumber");
+			
+			sql = "select count(*) as numOfTicket"
+			+ "from reservation join ticket join flight "
+			+ "where reservation.ticketID = ticket.ticketID and ticket.flightNumber = flight.flightNumber " 
+			+ "and ticket.flightNumber = ?";
+			
+			int numOfTicket = 0;
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, flightNumber);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				
+				rs.next();
+				numOfTicket = rs.getInt("numOfTicket");
+							
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("numOfTicket", numOfTicket);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/administratorStatisticsResult6.jsp").forward(
+					req, resp);			
 			
 		}
 		else if (req.getParameter("order").equals("seventh"))
 		{
+			sql = "SELECT airportName, c as maxNumOfPassenger" +
+					"FROM (SELECT airportCode, COUNT(*) AS c " +
+					"FROM Flight Join Airport ON airportCode = departureAirportCode " +
+					"GROUP BY airportCode) R Natural Join Airport " +
+					"where c in (select max(c) from " +
+					"(SELECT airportCode, COUNT(*) AS c " +
+					"FROM Flight Join Airport ON airportCode = departureAirportCode " +
+					"GROUP BY airportCode) R Natural Join Airport)";
 			
+			List<SeventhStatistic> seventhStatistics = new ArrayList<SeventhStatistic>();
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				
+				while (rs.next())
+				{
+					SeventhStatistic seventhStatistic = new SeventhStatistic();
+					seventhStatistic.setAirportName(rs.getString("airportName"));
+					seventhStatistic.setMaxNumOfPassenger(rs.getInt("maxNumOfPassenger"));
+					seventhStatistics.add(seventhStatistic);
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("seventhStatistics", seventhStatistics);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/administratorStatisticsResult7.jsp").forward(
+					req, resp);
 		}
 		else if (req.getParameter("order").equals("eighth"))
-		{
+		{			
+			sql = "select airlineName, max(c) as maxNumOfPassenger" +
+					"from (select airlineCode, count(*) as c " +
+					"from reservation join ticket join flight " +
+					"where reservation.ticketID = ticket.ticketID " +
+					"and ticket.flightNumber = flight.flightNumber " +
+					"group bY airlineCode) R natural join airline";
 			
+			List<EighthStatistic> eighthStatistics = new ArrayList<EighthStatistic>();
+			try {
+				prepStmt = conn.prepareStatement(sql);
+				logger.info("prepStmt: " + prepStmt.toString());
+				rs = prepStmt.executeQuery();
+				
+				while (rs.next())
+				{
+					EighthStatistic eighthStatistic = new EighthStatistic();
+					eighthStatistic.setAirlineName(rs.getString("airlineName"));
+					eighthStatistic.setMaxNumOfPassenger(rs.getInt("maxNumOfPassenger"));
+					eighthStatistics.add(eighthStatistic);
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+				sqlError = se.getMessage();
+			} finally {
+				try {
+					prepStmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			DbConnection.closeConnection(conn);
+			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("eighthStatistics", eighthStatistics);
+			req.getRequestDispatcher(
+					"/WEB-INF/jsp/administratorStatisticsResult8.jsp").forward(
+					req, resp);
 		}
 		
 	}

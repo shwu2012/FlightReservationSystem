@@ -3,6 +3,7 @@ package sjsu.cs157a.dbpro.domain;
 import java.util.Date;
 
 public class Person {
+	 private String userName;
 	 private String lastName;
 	 private String firstName;
 	 private String middleName;
@@ -18,6 +19,16 @@ public class Person {
 	 
 	 public enum Gender{M, F;}
 
+	public String getUserName()
+	{
+		return userName;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+		
 	public String getLastName() {
 		return lastName;
 	}
