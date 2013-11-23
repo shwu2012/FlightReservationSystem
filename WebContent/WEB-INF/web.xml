@@ -30,6 +30,10 @@
     <servlet-class>sjsu.cs157a.dbpro.servlet.EmployeeSignInServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>adminSignIn</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.AdministratorSignInServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>passengerRegister</servlet-name>
     <servlet-class>sjsu.cs157a.dbpro.servlet.PassengerRegisterServlet</servlet-class>
   </servlet>
@@ -92,6 +96,10 @@
   <servlet-mapping>
     <servlet-name>employeeSignIn</servlet-name>
     <url-pattern>/employeesignin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminSignIn</servlet-name>
+    <url-pattern>/adminsignin</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>passengerRegister</servlet-name>

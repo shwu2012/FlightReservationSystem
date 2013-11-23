@@ -57,6 +57,7 @@
            </div>
             <div id="adminLogin" class="signIn <c:if test="${type ne 'admin'}">hidden</c:if>">
                 <h2>Administrator Sign In</h2>
+                <form action="adminsignin" method="post" id="adminLoginForm">
                 <p class="loginInstruction">Username and password both required. </p>
                 <span id="adminLoginError" class="redText hidden"></span>
                 <br/>
@@ -64,6 +65,7 @@
                 <br/>
                 <label for="aPassWord">Password:</label><input id="aPassWord" class="signInSpacing signInInput" name="apassword" type="password" />
                 <br/>
+                </form>
                 <button id="acancel" class="cancelButton signInSpacing">Cancel</button>
                 <button id="alogin" class="login signInSpacing">Sign In</button>
             </div>
@@ -195,16 +197,7 @@
         	$("#employeeLoginForm").submit();
         });
         $("#alogin").click(function(){
-            $("#adminLoginError").val("");
-            
-            if($("#aUserName").val() == "clark" && $("#aPassWord").val() == '1234')
-            {
-                window.location = "AdminDashboard.html";
-            }
-            else
-            {
-                $("#adminLoginError").text("Invalid username/password combination").show();
-            }
+        	$("#adminLoginForm").submit();
         });
         
         //register a passenger
@@ -476,6 +469,9 @@
         $("#elogin").click(function(){
         	$('#employeeLoginForm').submit();
         });	
+        $("#alogin").click(function(){
+        	$('#adminLoginForm').submit();
+        });
     </script>
 </body>
 </html>

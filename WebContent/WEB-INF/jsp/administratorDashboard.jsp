@@ -248,7 +248,7 @@
             <h1>Administrator Dashboard</h1>
             <div id="welcome">
                 <span>Welcome, </span>
-                <span id="userName">Clark</span>
+                <span id="userName"><c:out value="${username}"/></span>
             </div>
             <div id="logout">
                 <a id="userLogout" href="Main Login Page.html">Logout</a>
