@@ -351,8 +351,19 @@
         </c:when>
         <c:when test="${param.show eq 'archive'}">
             <!--archive message container-->
-            <div id="archiveMessage">
-              TODO: archive message shows here
+            <div id="archiveMessage" class="center">
+              <form action="administratorarchive" method="post" id="archiveForm">
+                <p>Archive reservations before the specified date.</p>
+                <label for="archiveDate">Archive Date:</label><input type="date" id="archiveDate" name="archiveDate" />
+                <label for="threshold">Threshold:</label>
+                <select id="threshold" name="threshold">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+                <button class="reserve">Archive</button>
+              </form>
             </div>
         </c:when>    
         </c:choose>

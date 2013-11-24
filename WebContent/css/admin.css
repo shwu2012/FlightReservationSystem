@@ -240,3 +240,8 @@ table.result td, table.result th {
 table.result th {
 	padding: 2px 10px;
 }
+
+#archiveMessage {
+	text-align: center;
+}
+}
