@@ -2,7 +2,6 @@ package sjsu.cs157a.dbpro.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,27 +17,19 @@ import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
 import sjsu.cs157a.dbpro.domain.Employee;
-import sjsu.cs157a.dbpro.domain.FirstStatistic;
 import sjsu.cs157a.dbpro.domain.Flight;
 import sjsu.cs157a.dbpro.domain.Person;
-import sjsu.cs157a.dbpro.domain.Person.Gender;
 import sjsu.cs157a.dbpro.domain.Ticket;
 
 /**
  * Servlet implementation class AdministratorViewServlet
  */
-@WebServlet("/AdministratorViewServlet")
 public class AdministratorViewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger
-			.getLogger(AdministratorViewsServlet.class);   
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+			.getLogger(AdministratorViewsServlet.class);
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		Connection conn = DbConnection.openConnection();
 		PreparedStatement prepStmt = null;
 		String sql = null;

@@ -37,10 +37,41 @@
                 <div id="modMenu">
                 <h3>View Selection:</h3>
                 <ul id="modItems" class="menuItems">
-                    <li class="modOption">Employee</li>
-                    <li class="modOption">Flight</li>
-                    <li class="modOption">Ticket</li>
+                    <li class="modOption" onclick="$('#modCommands > div').hide(); $('#viewEmployee').show();">Employee</li>
+                    <li class="modOption" onclick="$('#modCommands > div').hide(); $('#viewFlight').show();">Flight</li>
+                    <li class="modOption" onclick="$('#modCommands > div').hide(); $('#viewTicket').show();">Ticket</li>
                 </ul>
+                </div>
+                
+                <div id="modCommands">
+                    <!--Employee Delete-->
+                    <div id="viewEmployee" class="hidden">
+                        <h4>View Employee:</h4>
+                        <form action="administratorview?view=employee" method="post" id="viewEmployeeForm">
+                          <p>TODO: fill text here</p>
+                          <div class="centerText">
+                            <button class="reserve">View</button>
+                          </div>
+                        </form>
+                    </div>
+                    <div id="viewFlight" class="hidden">
+                        <h4>View Flight:</h4>
+                        <form action="administratorview?view=flight" method="post" id="viewFlightForm">
+                          <p>TODO: fill text here</p>
+                          <div class="centerText">
+                            <button class="reserve">View</button>
+                          </div>
+                        </form>
+                    </div>
+                    <div id="viewTicket" class="hidden">
+                        <h4>View Flight:</h4>
+                        <form action="administratorview?view=ticket" method="post" id="viewTicketForm">
+                          <p>TODO: fill text here</p>
+                          <label for="employeeID">Employee Username:</label>
+                          <input id="employeeID" type="text" name="employeeUsername" />
+                          <button class="reserve">View</button>
+                        </form>
+                    </div>
                 </div>
                 <div style="clear:both"></div>
             </div>
