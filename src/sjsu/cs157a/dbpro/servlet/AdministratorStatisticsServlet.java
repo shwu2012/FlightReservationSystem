@@ -33,8 +33,6 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			.getLogger(AdministratorStatisticsServlet.class);   
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		Connection conn = DbConnection.openConnection();
 		PreparedStatement prepStmt = null;
 		String sql = null;
@@ -74,13 +72,13 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 				try {
 					prepStmt.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
 			req.setAttribute("firstStatistics", firstStatistics);
+			req.setAttribute("airlineName", airlineName);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult1.jsp").forward(
 					req, resp);

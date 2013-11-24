@@ -32,7 +32,10 @@
         <div id="contentArea">
         <c:choose>
         <c:when test="${empty sqlError}">
-        <table>
+        <div class="centerText">
+        <h2>Flight number, departure date, and average age of passengers 
+        for all flights of <nobr>&ldquo;<c:out value="${airlineName}" />&rdquo;</nobr></h2>
+        <table class="result">
           <tr>
             <th>Flight Number</th>
             <th>Departure Date</th>
@@ -46,6 +49,7 @@
           </tr>
           </c:forEach>
         </table>
+        </div>
         </c:when>
         <c:otherwise>
         SQL error: <c:out value="${sqlError}" /> 
