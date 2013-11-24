@@ -21,21 +21,7 @@ import sjsu.cs157a.dbpro.db.DbConnection;
 public class EmployeeSignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger
-			.getLogger(EmployeeSignInServlet.class);   
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeSignInServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+			.getLogger(EmployeeSignInServlet.class);
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -84,10 +70,16 @@ public class EmployeeSignInServlet extends HttpServlet {
 		} else {
 			logger.info(String.format("invalid username: %s, password: %s",
 					eusername, epassword));
-			req.setAttribute("error", "Invalid username/password combination.");
+			req.setAttribute("employeeError", "Invalid username/password combination.");
 			req.setAttribute("type", "employee");
 			req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req, resp);
 		}
 	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req, resp);
+	}	
 
 }

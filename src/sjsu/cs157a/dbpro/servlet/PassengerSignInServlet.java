@@ -72,7 +72,7 @@ public class PassengerSignInServlet extends HttpServlet {
 		} else {
 			logger.info(String.format("invalid username: %s, password: %s",
 					pusername, ppassword));
-			req.setAttribute("error", "Invalid username/password combination.");
+			req.setAttribute("passengerError", "Invalid username/password combination.");
 			req.setAttribute("type", "passenger");
 			req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req, resp);
 		}
