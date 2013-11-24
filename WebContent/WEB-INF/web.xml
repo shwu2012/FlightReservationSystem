@@ -73,6 +73,10 @@
     <servlet-name>statistic</servlet-name>
     <servlet-class>sjsu.cs157a.dbpro.servlet.AdministratorStatisticsServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>administratorView</servlet-name>
+    <servlet-class>sjsu.cs157a.dbpro.servlet.AdministratorViewsServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>searchFlights</servlet-name>
     <url-pattern>/searchflights</url-pattern>
@@ -144,6 +148,10 @@
   <servlet-mapping>
     <servlet-name>statistic</servlet-name>
     <url-pattern>/statistic</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>administratorView</servlet-name>
+    <url-pattern>/administratorview</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
