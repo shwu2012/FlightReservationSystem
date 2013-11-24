@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +18,11 @@ import sjsu.cs157a.dbpro.db.DbConnection;
 /**
  * Servlet implementation class AdministratorSignInServlet
  */
-@WebServlet("/AdministratorSignInServlet")
 public class AdministratorSignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger
 			.getLogger(AdministratorSignInServlet.class);   
     
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String ausername = req.getParameter("ausername");
