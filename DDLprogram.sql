@@ -138,6 +138,22 @@ CREATE TABLE RECORD
  reservationCount INT default 5
 );
 
+DROP TABLE IF EXISTS ARCHIVEDRESERVATION;
+CREATE TABLE ARCHIVEDRESERVATION
+(reservationID VARCHAR(20),
+ passengerID VARCHAR(10),
+ ticketID VARCHAR(10),
+ PRIMARY KEY(reservationID)
+);
+
+DROP VIEW IF EXISTS RESERVATIONVIEW;
+CREATE VIEW RESERVATIONVIEW as
+select reservationID, passengerID, ticketID
+from RESERVATION union
+select reservationID, passengerID, ticketID
+from ARCHIVEDRESERVATION;
+
+
 DROP TRIGGER IF EXISTS ReservationInsertTrigger;
 delimiter //
 CREATE TRIGGER ReservationInsertTrigger
@@ -192,6 +208,31 @@ BEGIN
 END;//
 delimiter ;
 
+DROP PROCEDURE IF EXISTS getPastReservationCount;
+DELIMITER //
+CREATE PROCEDURE getPastReservationCount(IN targetTime TIMESTAMP, OUT ReservationCount INT)
+BEGIN
+  select count(*) into ReservationCount from reservation where updateAt < targetTime;
+END;//
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS insertArchivedReservation;
+DELIMITER //
+CREATE PROCEDURE insertArchivedReservation(IN targetTime TIMESTAMP)
+BEGIN
+  insert into archivedReservation select reservationID, passengerID, ticketID 
+from reservation where updateAt < targetTime;
+END;//
+DELIMITER ; 
+
+
+DROP PROCEDURE IF EXISTS deleteReservation;
+DELIMITER //
+CREATE PROCEDURE deleteReservation(IN targetTime TIMESTAMP)
+BEGIN
+  delete from reservation where updateAt < targetTime;
+END;//
+DELIMITER ;
 
 
 LOAD DATA LOCAL INFILE 'c:\\SQL\\passenger.txt' INTO TABLE PASSENGER;
