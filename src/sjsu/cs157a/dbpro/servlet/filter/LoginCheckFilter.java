@@ -33,8 +33,7 @@ public class LoginCheckFilter implements Filter {
 				&& path.indexOf('.') == -1) {
 			if (req.getSession().getAttribute("username") == null) {
 				logger.warn("unexpected access to path: " + path);
-				resp.sendRedirect(req.getServletContext().getContextPath()
-						+ SIGN_IN_PATH);
+				resp.sendRedirect(req.getContextPath() + SIGN_IN_PATH);
 				return;
 			}
 		}
