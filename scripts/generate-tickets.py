@@ -40,7 +40,7 @@ for f in flight_numbers:
                 price += 85
             if price < 50:
                 price = 50.0 # min price
-            # e.g. 'T000000001	UA858	2013-11-10	2013-11-10	E	39	600.5'
-            print 'T%s\t%s\t%s\t%s\t%s\t%d\t%.2f' % (
-                str(ticket_id).zfill(9), f[0], depart_date, arrival_date, s, ticket_number, price)
+            # e.g. 'T000000001	UA858	2013-11-10	2013-11-10	E	39	600'
+            print 'T%s\t%s\t%s\t%s\t%s\t%d\t%d' % (
+                str(ticket_id).zfill(9), f[0], depart_date, arrival_date, s, ticket_number, int(price))
             
