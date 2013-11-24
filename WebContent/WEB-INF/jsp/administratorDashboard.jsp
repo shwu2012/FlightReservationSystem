@@ -402,53 +402,11 @@
            $("#deleteFlight").show();
         });
 
-        //display messages for when insert, update, and delete buttons are clicked
-        //YOU NEED TO ADD THE DATABASE FUNCTIONS HERE AND DISPLAY MESSAGE IF SUCCESSFUL
-        /*
-        $(".insert").click(function(){
-           $("#modCommands").children().hide();
-           $("#message").html("<h4>Message:</h4><p>Insert performed successfully.</p>").show();
-        });
-        $(".update").click(function(){
-           $("#modCommands").children().hide();
-           $("#message").html("<h4>Message:</h4><p>Update performed successfully.</p>").show();
-        });
-        $(".delete").click(function(){
-           $("#modCommands").children().hide();
-           $("#message").html("<h4>Message:</h4><p>Delete performed successfully.</p>").show();
-        });
-        */
-
         //handle hover event of statistic list items
         $(".statOption").click(function(event){
-          if (event.target.tagName != 'INPUT') {
+          if (event.target.tagName != 'INPUT' && event.target.tagName != 'BUTTON') {
             $(this).children("div").slideToggle();
           }
-        });
-
-        $("#stat1").click(function(){
-           $("#statCommands").html("<p>Stat 1 result here.</p>").show();
-        });
-        $("#stat2").click(function(){
-           $("#statCommands").html("<p>Stat 2 result here.</p>").show();
-        });
-        $("#stat3").click(function(){
-           $("#statCommands").html("<p>Stat 3 result here.</p>").show();
-        });
-        $("#stat4").click(function(){
-           $("#statCommands").html("<p>Stat 4 result here.</p>").show();
-        });
-        $("#stat5").click(function(){
-           $("#statCommands").html("<p>Stat 5 result here.</p>").show();
-        });
-        $("#stat6").click(function(){
-           $("#statCommands").html("<p>Stat 6 result here.</p>").show();
-        });
-        $("#stat7").click(function(){
-           $("#statCommands").html("<p>Stat 7 result here.</p>").show();
-        });
-        $("#stat8").click(function(){
-           $("#statCommands").html("<p>Stat 8 result here.</p>").show();
         });
     </script>
 
