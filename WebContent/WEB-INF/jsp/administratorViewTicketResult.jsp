@@ -34,33 +34,26 @@
         <c:choose>
         <c:when test="${empty sqlError}">
         <div class="centerText">
-        <h2>Employee Information</h2>
+        <h2>Ticket Information</h2>
         <table class="result">
-          <tr>
-            <th>User</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Wage</th>
-            <th>Birth Date</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Airline</th>
+         <tr>
+            <th>Ticket ID</th>
+            <th>Flight Number</th>
+            <th>Departure Date</th>
+            <th>Arrival Date</th> 
+            <th>Seat Class</th>
+            <th>Available Seats</th>
+            <th>Price</th>          
           </tr>
-          <c:forEach items="${employees}" var="employee">
+          <c:forEach items="${tickets}" var="ticket">
           <tr>
-            <td><c:out value="${employee.userName}" /></td>
-            <td><c:out value="${employee.firstName} ${fn:toUpperCase(employee.lastName)}" /></td>
-            <td><c:out value="${employee.age}" /></td>
-            <td><c:out value="${employee.wage}" /></td>
-            <td><c:out value="${employee.birthDate}" /></td>
-            <td><c:out value="${employee.gender}" /></td>
-            <td><c:out value="${employee.email}" /></td>
-            <td><c:out value="${employee.phone}" /></td>
-            <td><c:out value="${employee.street}"/><br/>
-              <c:out value="${employee.city}, ${employee.stateProvinceCounty} ${employee.country}" /></td>
-            <td><c:out value="${employee.airlineCode}" /></td>
+            <td><c:out value="${ticket.ticketID}" /></td>
+            <td><c:out value="${ticket.flightNumber}" /></td>
+            <td><c:out value="${ticket.departureDate}" /></td>
+            <td><c:out value="${ticket.arrivalDate}" /></td>
+            <td><c:out value="${ticket.seatClass}" /></td>
+            <td><c:out value="${ticket.availableSeats}" /></td>
+            <td><c:out value="${ticket.price}" /></td>
           </tr>
           </c:forEach>
         </table>

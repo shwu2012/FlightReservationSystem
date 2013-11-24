@@ -93,15 +93,15 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 					+ "from (select flightnumber, count(*) as c "
 					+ "from reservation join ticket "
 					+ "where reservation.ticketID = ticket.ticketID "
-					+ "and flightNumber = (select flightnumber from Flight "
+					+ "and flightNumber in (select flightnumber from Flight "
 					+ "where departureAirportCode = ? and arrivalAirportCode = ?) "
 					+ "group by flightnumber) R "
-					+ "where c = (select  mac(c) from (select flightnumber, count(*) as c "
+					+ "where c in (select max(c) from (select flightnumber, count(*) as c "
 					+ "from reservation join ticket "
 					+ "where reservation.ticketID = ticket.ticketID "
-					+ "and flightNumber = (select flightnumber from Flight "
+					+ "and flightNumber in (select flightnumber from Flight "
 					+ "where departureAirportCode = ? and arrivalAirportCode = ?) "
-					+ "group by flightnumber) R1) ";
+					+ "group by flightnumber) R1)";
 			
 			List<SecondStatistic> secondStatistics = new ArrayList<SecondStatistic>();
 		
@@ -109,6 +109,8 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setString(1, departureAirportCode);
 				prepStmt.setString(2, arrivalAirportCode);
+				prepStmt.setString(3, departureAirportCode);
+				prepStmt.setString(4, arrivalAirportCode);
 				logger.info("prepStmt: " + prepStmt.toString());
 				rs = prepStmt.executeQuery();
 				
@@ -132,6 +134,8 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("departureAirportCode", departureAirportCode);
+			req.setAttribute("arrivalAirportCode", arrivalAirportCode);
 			req.setAttribute("secondStatistics", secondStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult2.jsp").forward(
@@ -142,11 +146,10 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		{
 			
 			int age = Integer.parseInt(req.getParameter("age"));
-			String country = req.getParameter("country");
-			String flightNumber = req.getParameter("flightNumber");
+			String flightNumber = req.getParameter("flight_number");
 			
 			sql = "select firstName, lastName, email from passenger " +
-					"where age > ? and country <> ? and " +
+					"where age > ? and " +
 					"passengerID in (select passengerID FROM Reservation " +
 					"WHERE ticketID IN  (SELECT ticketID FROM Ticket WHERE  flightNumber = ?))";
 			
@@ -154,8 +157,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			try {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setInt(1, age);
-				prepStmt.setString(2, country);
-				prepStmt.setString(3, flightNumber);
+				prepStmt.setString(2, flightNumber);
 				logger.info("prepStmt: " + prepStmt.toString());
 				rs = prepStmt.executeQuery();
 				
@@ -180,6 +182,8 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("flightNumber", flightNumber);
+			req.setAttribute("age", age);
 			req.setAttribute("thirdStatistics", thirdStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult3.jsp").forward(
@@ -188,7 +192,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		}
 		else if (req.getParameter("order").equals("fourth"))
 		{
-			int age = Integer.parseInt(req.getParameter("age"));
+			int age = Integer.parseInt(req.getParameter("average_age"));
 			sql = "select airlineName from airline where airlineCode in" +
 					" (select airlineCode from employee group by airlineCode having avg(age) > ?)";
 				
@@ -218,6 +222,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("age", age);
 			req.setAttribute("fourthStatistics", fourthStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult4.jsp").forward(
@@ -229,14 +234,13 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			String departureDate = req.getParameter("depart_date");
 			
 			sql = "select sum(price) as revenue from ticket natural join flight " 
-			    + "WHERE airlineCode = (SELECT airlineCode from airline where airlineName like ?) "
+			    + "WHERE airlineCode = (SELECT airlineCode from airline where airlineName = ?) "
 				+ "AND departureDate = ?";
 		
-			String airlineName2 = "%" + airlineName + "%";
 			int revenue = 0;
 			try {
 				prepStmt = conn.prepareStatement(sql);
-				prepStmt.setString(1, airlineName2);
+				prepStmt.setString(1, airlineName);
 				prepStmt.setString(2, departureDate);
 				logger.info("prepStmt: " + prepStmt.toString());
 				rs = prepStmt.executeQuery();

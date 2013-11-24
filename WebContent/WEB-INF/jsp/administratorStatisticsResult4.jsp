@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,33 +33,15 @@
         <c:choose>
         <c:when test="${empty sqlError}">
         <div class="centerText">
-        <h2>Employee Information</h2>
+        <h2>Airline Names with employees of an average age over age
+         <nobr>&ldquo;<c:out value="${age}" />&rdquo;</nobr></h2>
         <table class="result">
           <tr>
-            <th>User</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Wage</th>
-            <th>Birth Date</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Airline</th>
+            <th>Airline Name</th>
           </tr>
-          <c:forEach items="${employees}" var="employee">
+          <c:forEach items="${fourthStatistics}" var="item">
           <tr>
-            <td><c:out value="${employee.userName}" /></td>
-            <td><c:out value="${employee.firstName} ${fn:toUpperCase(employee.lastName)}" /></td>
-            <td><c:out value="${employee.age}" /></td>
-            <td><c:out value="${employee.wage}" /></td>
-            <td><c:out value="${employee.birthDate}" /></td>
-            <td><c:out value="${employee.gender}" /></td>
-            <td><c:out value="${employee.email}" /></td>
-            <td><c:out value="${employee.phone}" /></td>
-            <td><c:out value="${employee.street}"/><br/>
-              <c:out value="${employee.city}, ${employee.stateProvinceCounty} ${employee.country}" /></td>
-            <td><c:out value="${employee.airlineCode}" /></td>
+            <td><c:out value="${item.airlineName}" /></td>
           </tr>
           </c:forEach>
         </table>

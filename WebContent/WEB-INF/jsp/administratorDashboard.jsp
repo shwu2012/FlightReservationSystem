@@ -46,7 +46,7 @@
                 <div id="modCommands">
                     <!--Employee Delete-->
                     <div id="viewEmployee" class="hidden">
-                        <h4>View Employee:</h4>
+                        <h4>View Employee Information:</h4>
                         <form action="administratorview?view=employee" method="post" id="viewEmployeeForm">
                           <p>TODO: fill text here</p>
                           <div class="centerText">
@@ -55,7 +55,7 @@
                         </form>
                     </div>
                     <div id="viewFlight" class="hidden">
-                        <h4>View Flight:</h4>
+                        <h4>View Flight Information:</h4>
                         <form action="administratorview?view=flight" method="post" id="viewFlightForm">
                           <p>TODO: fill text here</p>
                           <div class="centerText">
@@ -64,11 +64,11 @@
                         </form>
                     </div>
                     <div id="viewTicket" class="hidden">
-                        <h4>View Flight:</h4>
+                        <h4>View Ticket Information:</h4>
                         <form action="administratorview?view=ticket" method="post" id="viewTicketForm">
                           <p>TODO: fill text here</p>
-                          <label for="employeeID">Employee Username:</label>
-                          <input id="employeeID" type="text" name="employeeUsername" />
+                          <label for="flightNumber">Flight Number:</label>
+                          <input id="flightNumber" type="text" name="flightNumber" />
                           <button class="reserve">View</button>
                         </form>
                     </div>
@@ -286,11 +286,15 @@
                             </form>
                             </div>
                         </li>
-                        <li class="statOption">View names and emails for all passengers of a given flight.
+                        <li class="statOption">View names and emails for all passengers over a given age of a given flight.
                             <div class="hidden centerText">
                             <form action="statistic?order=third" method="post" id="statisticThirdForm">
+                            	<label for="age">Age:</label>
+                                <input id="age" type="text" name="age" />
+                                <br/>
                                 <label for="fNumber">Flight Number:</label>
                                 <input id="fNumber" type="text" name="flight_number" />
+                                <br/>
                                 <button id="stat3" class="reserve">View statistic</button>
                             </form>
                             </div>

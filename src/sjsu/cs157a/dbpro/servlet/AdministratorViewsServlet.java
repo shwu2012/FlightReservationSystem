@@ -93,7 +93,7 @@ public class AdministratorViewsServlet extends HttpServlet {
 		else if (req.getParameter("view").equals("flight"))
 		{
 			sql = "select flightNumber, airlineCode, aircraftModel, departureAirportCode, arrivalAirportCode, " +
-					"departureTime, arrivalTime, overnight from employee";
+					"departureTime, arrivalTime, overnight from flight";
 			 
 			List<Flight> flights = new ArrayList<Flight>();
 			try {
