@@ -261,6 +261,8 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("airlineName", airlineName);
+			req.setAttribute("departureDate", departureDate);
 			req.setAttribute("revenue", revenue);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult5.jsp").forward(
@@ -269,9 +271,9 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		}
 		else if (req.getParameter("order").equals("sixth"))
 		{
-			String flightNumber = req.getParameter("flightNumber");
+			String flightNumber = req.getParameter("flight_number");
 			
-			sql = "select count(*) as numOfTicket"
+			sql = "select count(*) as numOfTicket "
 			+ "from reservation join ticket join flight "
 			+ "where reservation.ticketID = ticket.ticketID and ticket.flightNumber = flight.flightNumber " 
 			+ "and ticket.flightNumber = ?";
@@ -299,6 +301,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("flightNumber", flightNumber);
 			req.setAttribute("numOfTicket", numOfTicket);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult6.jsp").forward(
@@ -307,14 +310,14 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		}
 		else if (req.getParameter("order").equals("seventh"))
 		{
-			sql = "SELECT airportName, c as maxNumOfPassenger" +
-					"FROM (SELECT airportCode, COUNT(*) AS c " +
-					"FROM Flight Join Airport ON airportCode = departureAirportCode " +
-					"GROUP BY airportCode) R Natural Join Airport " +
+			sql = "SELECT airportName, c as maxNumOfDeparturedFlights " +
+					"FROM (SELECT airportName, COUNT(*) AS c " +
+					"FROM Flight Join Airport where airportCode = departureAirportCode " +
+					"GROUP BY airportName) R " +
 					"where c in (select max(c) from " +
-					"(SELECT airportCode, COUNT(*) AS c " +
-					"FROM Flight Join Airport ON airportCode = departureAirportCode " +
-					"GROUP BY airportCode) R Natural Join Airport)";
+					"(SELECT airportName, COUNT(*) AS c " +
+					"FROM Flight Join Airport where airportCode = departureAirportCode " +
+					"GROUP BY airportName) R)";
 			
 			List<SeventhStatistic> seventhStatistics = new ArrayList<SeventhStatistic>();
 			try {
@@ -326,7 +329,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 				{
 					SeventhStatistic seventhStatistic = new SeventhStatistic();
 					seventhStatistic.setAirportName(rs.getString("airportName"));
-					seventhStatistic.setMaxNumOfPassenger(rs.getInt("maxNumOfPassenger"));
+					seventhStatistic.setMaxNumOfDeparturedFlights(rs.getInt("maxNumOfDeparturedFlights"));
 					seventhStatistics.add(seventhStatistic);
 				}
 			} catch (SQLException se) {
@@ -349,7 +352,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		}
 		else if (req.getParameter("order").equals("eighth"))
 		{			
-			sql = "select airlineName, max(c) as maxNumOfPassenger" +
+			sql = "select airlineName, max(c) as maxNumOfPassenger " +
 					"from (select airlineCode, count(*) as c " +
 					"from reservation join ticket join flight " +
 					"where reservation.ticketID = ticket.ticketID " +

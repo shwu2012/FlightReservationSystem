@@ -3,7 +3,7 @@ package sjsu.cs157a.dbpro.domain;
 public class SeventhStatistic
 {
 	private String airportName;
-	private int maxNumOfPassenger;
+	private int maxNumOfDeparturedFlights;
 	
 	public String getAirportName()
 	{
@@ -13,13 +13,14 @@ public class SeventhStatistic
 	{
 		this.airportName = airportName;
 	}
-	public int getMaxNumOfPassenger()
+	public int getMaxNumOfDeparturedFlights()
 	{
-		return maxNumOfPassenger;
+		return maxNumOfDeparturedFlights;
 	}
-	public void setMaxNumOfPassenger(int maxNumOfPassenger)
+	public void setMaxNumOfDeparturedFlights(int maxNumOfDeparturedFlights)
 	{
-		this.maxNumOfPassenger = maxNumOfPassenger;
-	}	
+		this.maxNumOfDeparturedFlights = maxNumOfDeparturedFlights;
+	}
+	
 	
 }
