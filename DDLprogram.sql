@@ -20,6 +20,7 @@ CREATE TABLE PASSENGER
  stateProvinceCounty VARCHAR(30),
  country VARCHAR(30),
  PRIMARY KEY(passengerID),
+ UNIQUE(username),
  UNIQUE(email)
 );
 
@@ -71,6 +72,7 @@ CREATE TABLE EMPLOYEE
  country VARCHAR(30),
  airlineCode VARCHAR(10),
  PRIMARY KEY(employeeID),
+ UNIQUE(username),
  UNIQUE(email)
 );
 
