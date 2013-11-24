@@ -34,33 +34,26 @@
         <c:choose>
         <c:when test="${empty sqlError}">
         <div class="centerText">
-        <h2>Employee Information</h2>
+        <h2>Flight Information</h2>
         <table class="result">
-          <tr>
-            <th>User</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Wage</th>
-            <th>Birth Date</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Airline</th>
+         <tr>
+            <th>Flight Number</th>
+            <th>Airline Code</th>
+            <th>Aircraft Model</th>
+            <th>Departure Airport Code</th>
+            <th>Arrival Airport Code</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>            
           </tr>
-          <c:forEach items="${employees}" var="employee">
+          <c:forEach items="${flights}" var="flight">
           <tr>
-            <td><c:out value="${employee.userName}" /></td>
-            <td><c:out value="${employee.firstName} ${fn:toUpperCase(employee.lastName)}" /></td>
-            <td><c:out value="${employee.age}" /></td>
-            <td><c:out value="${employee.wage}" /></td>
-            <td><c:out value="${employee.birthDate}" /></td>
-            <td><c:out value="${employee.gender}" /></td>
-            <td><c:out value="${employee.email}" /></td>
-            <td><c:out value="${employee.phone}" /></td>
-            <td><c:out value="${employee.street}"/><br/>
-              <c:out value="${employee.city}, ${employee.stateProvinceCounty} ${employee.country}" /></td>
-            <td><c:out value="${employee.airlineCode}" /></td>
+            <td><c:out value="${flight.flightNumber}" /></td>
+            <td><c:out value="${flight.airlineCode}" /></td>
+            <td><c:out value="${flight.aircraftModel}" /></td>
+            <td><c:out value="${flight.departureAirportCode}" /></td>
+            <td><c:out value="${flight.arrivalAirportCode}" /></td>
+            <td><c:out value="${flight.departureTime}" /></td>
+            <td><c:out value="${flight.arrivalTime}" /></td>
           </tr>
           </c:forEach>
         </table>
