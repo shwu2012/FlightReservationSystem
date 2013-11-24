@@ -72,10 +72,16 @@ public class AdministratorSignInServlet extends HttpServlet {
 		} else {
 			logger.info(String.format("invalid username: %s, password: %s",
 					ausername, apassword));
-			req.setAttribute("error", "Invalid username/password combination.");
-			req.setAttribute("type", "administrator");
+			req.setAttribute("adminError", "Invalid username/password combination.");
+			req.setAttribute("type", "admin");
 			req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req, resp);
 		}
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req, resp);
+	}	
 
 }

@@ -29,8 +29,8 @@
                 <h2>Passenger Sign In</h2>
                 <form action="signin" method="post" id="passLoginForm">
                 <p class="loginInstruction">Username and password both required. </p>
-                <c:if test="${not empty error}">
-                  <span id="passLoginError" class="redText"><c:out value="${error}" /></span><br/>
+                <c:if test="${not empty passengerError}">
+                  <span id="passLoginError" class="redText"><c:out value="${passengerError}" /></span><br/>
                 </c:if>
 
                 <label for="pUserName">Username:</label><input id="pUserName" class="signInSpacing signInInput" name="pusername" type="text"/>
@@ -45,8 +45,10 @@
                 <h2>Employee Sign In</h2>
                 <form action="employeesignin" method="post" id="employeeLoginForm">
                 <p class="loginInstruction">Username and password both required. </p>
-                <span id="employeeLoginError" class="redText hidden"></span>
-                <br/>
+                <c:if test="${not empty employeeError}">
+                  <span id="employeeLoginError" class="redText"><c:out value="${employeeError}" /></span><br/>
+                </c:if>
+                
                 <label for="eUserName">Username:</label><input id="eUserName" class="signInSpacing signInInput" name="eusername" type="text"/>
                 <br/>
                 <label for="ePassWord">Password:</label><input id="ePassWord" class="signInSpacing signInInput" name="epassword" type="password" />
@@ -59,8 +61,10 @@
                 <h2>Administrator Sign In</h2>
                 <form action="adminsignin" method="post" id="adminLoginForm">
                 <p class="loginInstruction">Username and password both required. </p>
-                <span id="adminLoginError" class="redText hidden"></span>
-                <br/>
+                <c:if test="${not empty adminError}">
+                <span id="adminLoginError" class="redText"><c:out value="${adminError}" /></span><br/>
+                </c:if>
+                
                 <label for="aUserName">Username:</label><input id="aUserName" class="signInSpacing signInInput" name="ausername" type="text"/>
                 <br/>
                 <label for="aPassWord">Password:</label><input id="aPassWord" class="signInSpacing signInInput" name="apassword" type="password" />
