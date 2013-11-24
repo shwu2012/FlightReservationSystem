@@ -286,11 +286,15 @@
                             </form>
                             </div>
                         </li>
-                        <li class="statOption">View names and emails for all passengers of a given flight.
+                        <li class="statOption">View names and emails for all passengers over a given age of a given flight.
                             <div class="hidden centerText">
                             <form action="statistic?order=third" method="post" id="statisticThirdForm">
+                            	<label for="age">Age:</label>
+                                <input id="age" type="text" name="age" />
+                                <br/>
                                 <label for="fNumber">Flight Number:</label>
                                 <input id="fNumber" type="text" name="flight_number" />
+                                <br/>
                                 <button id="stat3" class="reserve">View statistic</button>
                             </form>
                             </div>

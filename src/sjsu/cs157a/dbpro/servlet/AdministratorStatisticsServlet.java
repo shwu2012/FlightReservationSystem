@@ -146,11 +146,10 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		{
 			
 			int age = Integer.parseInt(req.getParameter("age"));
-			String country = req.getParameter("country");
-			String flightNumber = req.getParameter("flightNumber");
+			String flightNumber = req.getParameter("flight_number");
 			
 			sql = "select firstName, lastName, email from passenger " +
-					"where age > ? and country <> ? and " +
+					"where age > ? and " +
 					"passengerID in (select passengerID FROM Reservation " +
 					"WHERE ticketID IN  (SELECT ticketID FROM Ticket WHERE  flightNumber = ?))";
 			
@@ -158,8 +157,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			try {
 				prepStmt = conn.prepareStatement(sql);
 				prepStmt.setInt(1, age);
-				prepStmt.setString(2, country);
-				prepStmt.setString(3, flightNumber);
+				prepStmt.setString(2, flightNumber);
 				logger.info("prepStmt: " + prepStmt.toString());
 				rs = prepStmt.executeQuery();
 				
@@ -184,6 +182,8 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("flightNumber", flightNumber);
+			req.setAttribute("age", age);
 			req.setAttribute("thirdStatistics", thirdStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult3.jsp").forward(
@@ -192,7 +192,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 		}
 		else if (req.getParameter("order").equals("fourth"))
 		{
-			int age = Integer.parseInt(req.getParameter("age"));
+			int age = Integer.parseInt(req.getParameter("average_age"));
 			sql = "select airlineName from airline where airlineCode in" +
 					" (select airlineCode from employee group by airlineCode having avg(age) > ?)";
 				
@@ -222,6 +222,7 @@ public class AdministratorStatisticsServlet extends HttpServlet {
 			}
 			DbConnection.closeConnection(conn);
 			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("age", age);
 			req.setAttribute("fourthStatistics", fourthStatistics);
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/administratorStatisticsResult4.jsp").forward(
