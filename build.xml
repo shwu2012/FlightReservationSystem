@@ -46,15 +46,6 @@
 		</war>
 	</target>
 	
-	<target name="run" depends="war">
-		<java classname="MainWebApp" fork="true">
-			<classpath>
-				<pathelement path="${classes.dir}" />
-				<path refid="compile.classpath" />
-			</classpath>
-		</java>
-	</target>
-	
 	<target name="clean">
 		<delete dir="${dist.dir}" />
 		<delete dir="${build.dir}" />
