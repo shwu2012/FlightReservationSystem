@@ -170,7 +170,6 @@ AFTER INSERT ON RESERVATION
 FOR EACH ROW
 BEGIN
 	UPDATE TICKET SET availableSeats = availableSeats - 1 WHERE ticketID = NEW.ticketID;
-	#UPDATE PASSENGER SET reservationCount = reservationCount + 1 WHERE passengerID = NEW.passengerID;
 	UPDATE RECORD SET reservationCount = reservationCount + 1;
 END;//
 delimiter ;
@@ -182,8 +181,6 @@ AFTER DELETE ON RESERVATION
 FOR EACH ROW
 BEGIN
 	UPDATE TICKET SET availableSeats = availableSeats + 1 WHERE ticketID = OLD.ticketID;
-	#UPDATE PASSENGER SET reservationCount = reservationCount - 1 WHERE passengerID = OLD.passengerID;
-	
 END;//
 delimiter ;
 
