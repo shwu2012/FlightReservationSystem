@@ -97,8 +97,7 @@ public class TicketOperationServlet extends HttpServlet {
 			
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
-			String sql = "Insert into ticket " + "values (" + "?, " + "?, "
-					+ "?, " + "?, " + "?, " + "?, " + "?, " + "null" + ")";
+			String sql = "Insert into ticket values (?, ?, ?, ?, ?, ?, ?)";
 
 			try {
 				prepStmt = conn.prepareStatement(sql);

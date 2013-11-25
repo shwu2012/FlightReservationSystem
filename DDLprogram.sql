@@ -117,8 +117,8 @@ CREATE TABLE TICKET
  seatClass VARCHAR(1),
  availableSeats INT,
  price INT,
- updateAt TIMESTAMP,
  PRIMARY KEY (ticketID),
+ UNIQUE (flightNumber,departureDate,seatClass),
  FOREIGN KEY (flightNumber) REFERENCES FLIGHT(flightNumber) 
      ON DELETE CASCADE
 	 ON UPDATE CASCADE
