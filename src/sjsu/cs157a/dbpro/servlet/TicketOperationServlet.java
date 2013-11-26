@@ -27,7 +27,8 @@ public class TicketOperationServlet extends HttpServlet {
 			.getLogger(TicketOperationServlet.class);
 	private static final Map<String, String> sqlsByAttribute = new HashMap<String, String>();
 	static{
-		String sqlTemplate = "update ticket set %s = ? where flightNumber = ? and departureDate = ? and seatClass = ?";
+		String sqlTemplate = "update ticket set %s = ? " +
+				"where flightNumber = ? and departureDate = ? and seatClass = ?";
 		String[] attributes = new String[]{"availableSeats", "price"};
 		for (String s : attributes) {
 			sqlsByAttribute.put(s, String.format(sqlTemplate, s));
@@ -98,7 +99,7 @@ public class TicketOperationServlet extends HttpServlet {
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
 			String sql = "Insert into ticket " + "values (" + "?, " + "?, "
-					+ "?, " + "?, " + "?, " + "?, " + "?, " + "null" + ")";
+					+ "?, " + "?, " + "?, " + "?, " + "?)";
 
 			try {
 				prepStmt = conn.prepareStatement(sql);
@@ -182,7 +183,8 @@ public class TicketOperationServlet extends HttpServlet {
 			
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
-			String sql = "delete from ticket where flightNumber = ? and departureDate = ? and seatClass = ?";
+			String sql = "delete from ticket where flightNumber = ? and " +
+					"departureDate = ? and seatClass = ?";
 
 			try {
 				prepStmt = conn.prepareStatement(sql);
