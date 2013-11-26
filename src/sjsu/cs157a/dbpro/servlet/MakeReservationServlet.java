@@ -89,7 +89,7 @@ public class MakeReservationServlet extends HttpServlet
 				count /= 10;
 				magCount++;
 			}
-			for (int i = 0; i < 9 - magCount; i++)
+			for (int i = 0; i < 11 - magCount; i++)
 			{
 				partID += "0";
 			}
@@ -129,9 +129,12 @@ public class MakeReservationServlet extends HttpServlet
 				}
 			}
 
-			String sql2 = "select ticket.flightNumber, airlineCode, departureAirportCode, departureDate, departureTime, arrivalAirportCode, arrivalDate, arrivalTime, seatClass, price"
+			String sql2 = "select ticket.flightNumber, airlineCode, " +
+					"departureAirportCode, departureDate, departureTime, " +
+					"arrivalAirportCode, arrivalDate, arrivalTime, seatClass, price"
 					+ " from flight join ticket join reservation where "
-					+ "reservationID = ? and ticket.ticketID = reservation.ticketID and flight.flightNumber = ticket.flightNUmber";
+					+ "reservationID = ? and ticket.ticketID = reservation.ticketID " +
+					"and flight.flightNumber = ticket.flightNUmber";
 
 			List<Reservation> reservations = new ArrayList<Reservation>();
 			
@@ -251,7 +254,7 @@ public class MakeReservationServlet extends HttpServlet
 					count /= 10;
 					magCount++;
 				}
-				for (int i = 0; i < 9 - magCount; i++)
+				for (int i = 0; i < 11 - magCount; i++)
 				{
 					partID += "0";
 				}
