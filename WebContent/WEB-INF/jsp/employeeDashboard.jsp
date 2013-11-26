@@ -204,6 +204,7 @@
                  $("#eRegError").hide();
              }
          });
+         /*
          $("#eEditInfo").click(function(){
 
              var pass = $("#ePassword").val();
@@ -244,6 +245,7 @@
             $("#infoEditSuccessful").text("Information edited successfully.").show();
             $("#editEmployeeInfo").hide();
         });
+        */
             $("#eEditInfo").click(function(){
 	           	$('#editInfoForm').submit();
             });

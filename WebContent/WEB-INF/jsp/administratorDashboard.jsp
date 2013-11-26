@@ -381,7 +381,7 @@
 
         //handle click events for Employee update and delete options
         $("#UE").click(function(){
-           $("modCommands").children().hide();
+           $("#modCommands").children().hide();
            $("#updateWage").show();
         });
         $("#DE").click(function(){
