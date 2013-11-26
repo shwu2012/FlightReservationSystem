@@ -141,10 +141,10 @@ CREATE TABLE RESERVATION
 
 DROP TABLE IF EXISTS RECORD;
 CREATE TABLE RECORD
-(passengerCount INT default 9,
- employeeCount INT default 10,
- ticketCount INT default 8,
- reservationCount INT default 5
+(passengerCount INT,
+ employeeCount INT,
+ ticketCount INT,
+ reservationCount INT
 );
 
 DROP TABLE IF EXISTS ARCHIVEDRESERVATION;
