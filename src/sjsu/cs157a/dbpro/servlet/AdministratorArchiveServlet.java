@@ -36,6 +36,7 @@ public class AdministratorArchiveServlet extends HttpServlet {
 
 		CallableStatement callStmt = null;
 		String sqlError = null;
+		int sqlErrorCode = 0;
 		String countSql = "{call getPastReservationCount(?, ?)}";
 		String insertSql = "{call insertArchivedReservation(?)}";
 		String deleteSql = "{call deleteReservation(?)}";
@@ -74,6 +75,7 @@ public class AdministratorArchiveServlet extends HttpServlet {
 		} catch (SQLException se) {
 			se.printStackTrace();
 			sqlError = se.getMessage();
+			sqlErrorCode = se.getErrorCode();
 			if (conn != null) {
 				try {
 					conn.rollback();

@@ -35,7 +35,7 @@
         Operation is successful.
         </c:when>
         <c:otherwise>
-        SQL error: <c:out value="${sqlError}" /> 
+        Error: <c:out value="${sqlError}" /> 
         </c:otherwise>
         </c:choose>
         </div>

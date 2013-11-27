@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.Helper;
 
 /**
  * Servlet implementation class TicketOperationServlet
@@ -98,12 +99,9 @@ public class TicketOperationServlet extends HttpServlet {
 			
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
-<<<<<<< HEAD
-			String sql = "Insert into ticket " + "values (" + "?, " + "?, "
-					+ "?, " + "?, " + "?, " + "?, " + "?)";
-=======
+			int sqlErrorCode = 0;
+
 			String sql = "Insert into ticket values (?, ?, ?, ?, ?, ?, ?)";
->>>>>>> f2c3f82017f1426389d55dfb5018e70b30fdd3b1
 
 			try {
 				prepStmt = conn.prepareStatement(sql);
@@ -121,6 +119,7 @@ public class TicketOperationServlet extends HttpServlet {
 			} catch (SQLException se) {
 				se.printStackTrace();
 				sqlError = se.getMessage();
+				sqlErrorCode = se.getErrorCode();
 			} finally {
 				try {
 					prepStmt.close();
@@ -131,7 +130,7 @@ public class TicketOperationServlet extends HttpServlet {
 			}
 
 			DbConnection.closeConnection(conn);
-			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("sqlError", Helper.parseSqlError(sqlError, sqlErrorCode, "ticket"));
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
 					req, resp);

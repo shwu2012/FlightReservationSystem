@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.Helper;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -118,6 +119,7 @@ public class PassengerRegisterServlet extends HttpServlet {
 				
 		PreparedStatement prepStmt = null;
 		String sqlError = null;
+		int sqlErrorCode = 0;
 		String sql = "Insert into passenger "
 				+ "values ("
 				+ "?, "
@@ -161,6 +163,9 @@ public class PassengerRegisterServlet extends HttpServlet {
 		} catch (SQLException se) {
 			se.printStackTrace();
 			sqlError = se.getMessage();
+			sqlErrorCode = se.getErrorCode();
+			logger.info("sqlError: " + sqlError);
+			logger.info("sqlErrorCode: " + sqlErrorCode);
 		} finally {
 			try {
 				prepStmt.close();
@@ -178,7 +183,7 @@ public class PassengerRegisterServlet extends HttpServlet {
 			// Redirect to dashboard.
 			resp.sendRedirect("passengerdashboard?show=viewCustomerInfo");
 		} else {
-			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("sqlError", Helper.parseSqlError(sqlError, sqlErrorCode, "passenger"));
 			req.setAttribute("type", "registerPassenger");
 			req.getRequestDispatcher("/WEB-INF/jsp/signin.jsp").forward(req,
 					resp);

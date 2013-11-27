@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.Helper;
 
 public class FlightOperationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,6 +50,7 @@ public class FlightOperationServlet extends HttpServlet {
 
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
+			int sqlErrorCode = 0;
 			String sql = "Insert into flight " + "values (" + "?, " + "?, "
 					+ "?, " + "?, " + "?, " + "?, " + "?, " + "?" + ")";
 
@@ -68,6 +70,9 @@ public class FlightOperationServlet extends HttpServlet {
 			} catch (SQLException se) {
 				se.printStackTrace();
 				sqlError = se.getMessage();
+				sqlErrorCode = se.getErrorCode();
+				logger.info("sqlError: " + sqlError);
+				logger.info("sqlErrorCode: " + sqlErrorCode);
 			} finally {
 				try {
 					prepStmt.close();
@@ -78,7 +83,7 @@ public class FlightOperationServlet extends HttpServlet {
 			}
 
 			DbConnection.closeConnection(conn);
-			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("sqlError", Helper.parseSqlError(sqlError, sqlErrorCode, "flight"));
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
 					req, resp);
@@ -91,6 +96,7 @@ public class FlightOperationServlet extends HttpServlet {
 
 			PreparedStatement prepStmt = null;
 			String sqlError = null;
+			int sqlErrorCode = 0;
 			String sql = sqlByAttr.get(flightAttribute);
 
 			try {
@@ -103,6 +109,7 @@ public class FlightOperationServlet extends HttpServlet {
 			} catch (SQLException se) {
 				se.printStackTrace();
 				sqlError = se.getMessage();
+				sqlErrorCode = se.getErrorCode();
 			} finally {
 				try {
 					prepStmt.close();
@@ -113,7 +120,7 @@ public class FlightOperationServlet extends HttpServlet {
 			}
 
 			DbConnection.closeConnection(conn);
-			req.setAttribute("sqlError", sqlError);
+			req.setAttribute("sqlError", Helper.parseSqlError(sqlError, sqlErrorCode, "flight"));
 			req.getRequestDispatcher(
 					"/WEB-INF/jsp/adminstratorOperationResult.jsp").forward(
 					req, resp);			

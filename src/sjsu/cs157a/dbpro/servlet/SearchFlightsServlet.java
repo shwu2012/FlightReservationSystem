@@ -109,8 +109,6 @@ public class SearchFlightsServlet extends HttpServlet {
 					ticket.setPrice(rs.getFloat("price"));
 					ticket.setAvailableSeats(rs.getInt("availableSeats"));
 					returnTickets.add(ticket);
-					departureAirportCode = rs.getString("departureAirportCode");
-					arrivalAirportCode = rs.getString("arrivalAirportCode");
 				}
 			}
 		} catch (SQLException se) {

@@ -48,7 +48,7 @@
                     <div id="viewEmployee" class="hidden">
                         <h4>View Employee Information:</h4>
                         <form action="administratorview?view=employee" method="post" id="viewEmployeeForm">
-                          <p>TODO: fill text here</p>
+                          <p>View information of all employees.</p>
                           <div class="centerText">
                             <button class="reserve">View</button>
                           </div>
@@ -57,7 +57,7 @@
                     <div id="viewFlight" class="hidden">
                         <h4>View Flight Information:</h4>
                         <form action="administratorview?view=flight" method="post" id="viewFlightForm">
-                          <p>TODO: fill text here</p>
+                          <p>View information of all flights.</p>
                           <div class="centerText">
                             <button class="reserve">View</button>
                           </div>
@@ -66,7 +66,7 @@
                     <div id="viewTicket" class="hidden">
                         <h4>View Ticket Information:</h4>
                         <form action="administratorview?view=ticket" method="post" id="viewTicketForm">
-                          <p>TODO: fill text here</p>
+                          <p>View all the tickets of a given flight number:</p>
                           <label for="flightNumber">Flight Number:</label>
                           <input id="flightNumber" type="text" name="flightNumber" />
                           <button class="reserve">View</button>
@@ -278,9 +278,9 @@
                         <li class="statOption">View flight number of the most popular flight between given airports.
                             <div class="hidden centerText">
                             <form action="statistic?order=second" method="post" id="statisticSecondForm">
-                                <label for="da">Departure Airport:</label><input id="da" type="text" name="depart_airport" />
+                                <label for="da">Departure Airport Code:</label><input id="da" type="text" name="depart_airport" />
                                 <br/>
-                                <label for="aa">Arrival Airport:</label><input id="aa" type="text" name="arrival_airport" />
+                                <label for="aa">Arrival Airport Code:</label><input id="aa" type="text" name="arrival_airport" />
                                 <br/>
                                 <button id="stat2" class="reserve">View Statistic</button>
                             </form>
