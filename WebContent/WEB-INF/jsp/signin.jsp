@@ -123,6 +123,9 @@
                 <span id="eRegError"></span>
                 <div class="registerContainer">
                 <form action="employeeregister" method="post" id="employeeRegisterForm">
+                    <c:if test="${not empty sqlError}">
+                      <span id="employeeLoginError" class="redText"><c:out value="${sqlError}" /></span><br/>
+                    </c:if>
                     <span class="required">*</span><label for="eUName">User Name:</label><input id="eUName" class="registerSpacing" name="euserName" type="text"/>
                     <br/>
                     <span class="required">*</span><label for="ePassword">Password:</label><input id="ePassword" name="epassword" class="registerSpacing" type="password"/>
@@ -139,7 +142,7 @@
                     <br/>
                     <span class="required">*</span><label for="eBirthday">Birth date:</label><input id="eBirthday" class="registerSpacing" name="ebirthDate" type="date"/>
                     <br/>
-                    <span class="required">*</span><label>Gender:</label><label for="eGenderM" class="gm">M:</label><input type="radio" id="eGenderM" class="registerSpacing" name="egender" value="m"/><label for="eGenderF">F:</label><input id="eGenderF" name="eGender" type="radio" value="f"/>
+                    <span class="required">*</span><label>Gender:</label><label for="eGenderM" class="gm">M:</label><input type="radio" id="eGenderM" class="registerSpacing" name="egender" value="M"/><label for="eGenderF">F:</label><input id="eGenderF" name="eGender" type="radio" value="F"/>
                     <br/>
                     <span class="required">*</span><label for="eEmail">Email:</label><input id="eEmail" class="registerSpacing" name="eemail" type="email"/>
                     <br/>

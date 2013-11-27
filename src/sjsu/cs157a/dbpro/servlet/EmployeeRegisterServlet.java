@@ -165,7 +165,7 @@ public class EmployeeRegisterServlet extends HttpServlet {
 			prepStmt.setString(4, elastName);
 			prepStmt.setString(5, efirstName);
 			prepStmt.setString(6, emiddleName);
-			prepStmt.setString(7, egender);						
+			prepStmt.setString(7, egender);
 			prepStmt.setInt(8, age);
 			// a date in in the format "yyyy-mm-dd"
 			prepStmt.setDate(9, dateOfBirth);

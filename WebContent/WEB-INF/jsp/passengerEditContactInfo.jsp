@@ -33,7 +33,14 @@
         <div id="contentArea">
             <div id="editPassengerInfo">
                 <h2>Edit Passenger Information</h2>
-                <p>Information edited successfully.<p>              
+                <c:choose>
+                <c:when test="${empty sqlError}">
+                <p>Information edited successfully.<p>
+                </c:when>
+                <c:otherwise>
+                Error: <c:out value="${sqlError}" />
+                </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

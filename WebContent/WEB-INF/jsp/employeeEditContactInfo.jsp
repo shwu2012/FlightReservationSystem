@@ -30,7 +30,14 @@
         <div id="contentArea">
             <div id="editEmployeeInfo">
                 <h2>Edit Employee Information</h2>
+                <c:choose>
+                <c:when test="${empty sqlError}">
                 <p>Information edited successfully.<p>
+                </c:when>
+                <c:otherwise>
+                Error: <c:out value="${sqlError}" />
+                </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

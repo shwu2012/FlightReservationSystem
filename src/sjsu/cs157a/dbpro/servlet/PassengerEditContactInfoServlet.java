@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.Helper;
 
 /**
  * Servlet implementation class EditContactInfoServlet
@@ -61,15 +62,15 @@ public class PassengerEditContactInfoServlet extends HttpServlet {
 			logger.info("pemail: " + pemail);
 			logger.info("pphone: " + pphone);
 			logger.info("pstreet: " + pstreet);
-			logger.info("pstateProvinceCounty: " + pstateProvinceCounty);			
+			logger.info("pstateProvinceCounty: " + pstateProvinceCounty);
 			logger.info("pcountry: " + pcountry);*/
 			
 			Connection conn = DbConnection.openConnection();
 
 			PreparedStatement prepStmt = null;
 			
-			//logger.info("build up connection");
-			//String sqlError = null;
+			String sqlError = null;
+			int sqlErrorCode = 0;
 			String sql = "Update passenger "
 					+ "set pwd = ?, "
 					+ "firstName = ?, "
@@ -106,8 +107,8 @@ public class PassengerEditContactInfoServlet extends HttpServlet {
 				
 			} catch (SQLException se) {
 				se.printStackTrace();
-				//sqlError = se.getMessage();
-				
+				sqlError = se.getMessage();
+				sqlErrorCode = se.getErrorCode();
 			} finally {
 				try {
 					prepStmt.close();
@@ -115,23 +116,12 @@ public class PassengerEditContactInfoServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}		
+			}
 
 			DbConnection.closeConnection(conn);
-			
-			//logger.info("close connection");
-			
 			logger.info("Username: " + puserName);
-			/*if (sqlError == null) {
-				req.getRequestDispatcher("/WEB-INF/jsp/editContactInfo.jsp").forward(req, resp);
-			} else {
-				req.setAttribute("sqlError", sqlError);
-				req.setAttribute("type", "registerPassenger");
-				req.getRequestDispatcher("/WEB-INF/jsp/passengerDashboard.jsp").forward(req,
-						resp);
-			}*/
-		
-		req.getRequestDispatcher("/WEB-INF/jsp/passengerEditContactInfo.jsp").forward(req, resp);
+			req.setAttribute("sqlError", Helper.parseSqlError(sqlError, sqlErrorCode, "passenger"));
+			req.getRequestDispatcher("/WEB-INF/jsp/passengerEditContactInfo.jsp").forward(req, resp);
 	}
 
 }

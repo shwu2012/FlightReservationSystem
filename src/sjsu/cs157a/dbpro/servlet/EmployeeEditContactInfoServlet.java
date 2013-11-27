@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import sjsu.cs157a.dbpro.db.DbConnection;
+import sjsu.cs157a.dbpro.domain.Helper;
 
 /**
  * Servlet implementation class EmployeeEditContactInfoServlet
@@ -58,7 +59,7 @@ public class EmployeeEditContactInfoServlet extends HttpServlet {
 			logger.info("eemail: " + eemail);
 			logger.info("ephone: " + ephone);
 			logger.info("estreet: " + estreet);
-			logger.info("estateProvinceCounty: " + estateProvinceCounty);			
+			logger.info("estateProvinceCounty: " + estateProvinceCounty);
 			logger.info("ecountry: " + ecountry);*/
 			
 			Connection conn = DbConnection.openConnection();
@@ -66,7 +67,8 @@ public class EmployeeEditContactInfoServlet extends HttpServlet {
 			PreparedStatement prepStmt = null;
 			
 			//logger.info("build up connection");
-			//String sqlError = null;
+			String sqlError = null;
+			int sqlErrorCode = 0;
 			String sql = "Update employee "
 					+ "set pwd = ?, "
 					+ "firstName = ?, "
@@ -103,8 +105,8 @@ public class EmployeeEditContactInfoServlet extends HttpServlet {
 				
 			} catch (SQLException se) {
 				se.printStackTrace();
-				//sqlError = se.getMessage();
-				
+				sqlError = se.getMessage();
+				sqlErrorCode = se.getErrorCode();
 			} finally {
 				try {
 					prepStmt.close();
@@ -112,23 +114,12 @@ public class EmployeeEditContactInfoServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}		
+			}
 
 			DbConnection.closeConnection(conn);
-			
-			//logger.info("close connection");
-			
 			logger.info("Username: " + euserName);
-			/*if (sqlError == null) {
-				req.getRequestDispatcher("/WEB-INF/jsp/editContactInfo.jsp").forward(req, resp);
-			} else {
-				req.setAttribute("sqlError", sqlError);
-				req.setAttribute("type", "registerPassenger");
-				req.getRequestDispatcher("/WEB-INF/jsp/passengerDashboard.jsp").forward(req,
-						resp);
-			}*/
-		
-		req.getRequestDispatcher("/WEB-INF/jsp/employeeEditContactInfo.jsp").forward(req, resp);
+			req.setAttribute("sqlError", Helper.parseSqlError(sqlError, sqlErrorCode, "employee"));
+			req.getRequestDispatcher("/WEB-INF/jsp/employeeEditContactInfo.jsp").forward(req, resp);
 	}
 
 }

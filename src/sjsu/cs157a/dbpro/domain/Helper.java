@@ -12,9 +12,9 @@ public class Helper
 		if ((tableName.equals("passenger"))||(tableName.equals("employee"))){
 			if (sqlErrorCode == 1062){
 				if (sqlError.contains("username")){
-					errorMsg = "This User Name is already taken. Please choose another User Name.";
+					errorMsg = "This User Name is already taken.";
 				} else if (sqlError.contains("email")){
-					errorMsg = "This Email is already in use. You may already have an account. Please try again or sign in using your existing account.";
+					errorMsg = "This Email is already in use.";
 				}
 			}
 		} else if (tableName.equals("flight")) {
